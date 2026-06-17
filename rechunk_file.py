@@ -1,7 +1,16 @@
 import cf
 import time
+import os
+
 
 from fragmentation import check_fragmentation
+
+
+
+
+
+
+
 
 def rechunk_existing_netcdf(filename, outfilename, properties, kwchoices, chunks):
     """
@@ -27,17 +36,20 @@ def rechunk_existing_netcdf(filename, outfilename, properties, kwchoices, chunks
     for v in fields:
         ta = time.perf_counter()
         cs = v.nc_dataset_chunksizes()
+        xco = len(v.coord('X').data)
+        yco = len(v.coord('Y').data)
+       
         existing_chunks = list(cs)
-        grid_metadata = properties.get('grid', '') + f'{existing_chunks[-1]}x{existing_chunks[-2]}'
         new_chunks = list(cs)
         new_chunks[-2:] = chunks
         print('Existing chunks:', existing_chunks, '  New chunks:', new_chunks)
-
         v.nc_set_dataset_chunksizes(tuple(new_chunks))
         v.data.rechunk(tuple(new_chunks), inplace=True)
         tb = time.perf_counter() - ta
         print(f'Preparing rechunking for [{v.identity()}]({v.data.shape}) took {tb:.2f} seconds')
-        properties['grid'] = grid_metadata
+        
+        grid_metadata = properties.get('grid', '') + f'{xco}x{yco}'
+        properties['horizontal_grid'] = grid_metadata
         for k, vv in properties.items():
             if isinstance(vv, list):
                 vv = ','.join(vv)

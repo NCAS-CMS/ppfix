@@ -1,6 +1,6 @@
 from pyfive import File
 
-def check_fragmentation(ncfile):
+def check_fragmentation(ncfile, debug=False):
     """
     Test whether or not the metadata is fragmented, by looping over
     variables, and checking whether or not the first bytes of 
@@ -16,7 +16,8 @@ def check_fragmentation(ncfile):
         try:
             first_chunk = vid.first_chunk
         except TypeError as e:
-            print(f'Skipping variable {v}, probably not chunked (error {e})')
+            if debug:
+                print(f'Skipping variable {v}, probably not chunked (error {e})')
             continue
         range = vid.btree_range
         if first_chunk < first_data:
