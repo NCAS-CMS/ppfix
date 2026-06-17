@@ -1,0 +1,143 @@
+hi,,
+hs,,
+snowfrac,,
+Tsfc,,
+aice,,
+uvel,,
+vvel,,
+uatm,,
+vatm,,
+sice,,
+fswup,,
+snow_ai,,
+rain_ai,,
+sst,,
+sss,,
+uocn,,
+vocn,,
+frzmlt,,
+albsni,,
+flat_ai,,
+fsens_ai,,
+evap_ai,,
+evap_ice_ai,,
+evap_snow_ai,,
+Tair,,
+congel,,
+frazil,,
+snoice,,
+meltt,,
+melts,,
+meltb,,
+meltl,,
+fresh_ai,,
+fsalt_ai,,
+fhocn_ai,,
+strairx,,
+strairy,,
+strtltx,,
+strtlty,,
+strcorx,,
+strcory,,
+strocnx,,
+strocny,,
+strintx,,
+strinty,,
+strength,,
+divu,,
+shear,,
+sig1,,
+sig2,,
+dvidtt,,
+dvsdtt,,
+dvidtd,,
+dvsdtd,,
+daidtt,,
+daidtd,,
+dvidti,,
+dvsdti,,
+dagedtt,,
+dagedtd,,
+mlt_onset,,
+frz_onset,,
+trsig,,
+ice_present,,
+fsurf_ai,,
+fcondtop_ai,,
+iage,age_of_sea_ice,area:mean where sea_ice
+sithick,sea_ice_thickness,area:mean where sea_ice
+siage,age_of_sea_ice,area:mean where sea_ice
+sifb,sea_ice_freeboard,area:mean where sea_ice
+sisnconc,surface_snow_area_fraction,area:mean where sea_ice
+sisnthick,surface_snow_thickness,area: mean where snow over sea_ice
+sitemptop,sea_ice_surface_temperature,area:mean where sea_ice
+sitempsnic,sea_ice_surface_temperature,area:mean where sea_ice
+sitempbot,sea_ice_basal_temperature,area:mean where sea_ice
+siu,sea_ice_x_velocity,area:mean where sea_ice
+siv,sea_ice_y_velocity,area:mean where sea_ice
+sidmasstranx,sea_ice_x_transport,area:mean where sea_ice
+sidmasstrany,sea_ice_y_transport,area:mean where sea_ice
+sistrxdtop,surface_downward_x_stress,area:mean where sea_ice
+sistrydtop,surface_downward_y_stress,area:mean where sea_ice
+sistrxubot,upward_x_stress_at_sea_ice_base,area:mean where sea_ice
+sistryubot,upward_y_stress_at_sea_ice_base,area:mean where sea_ice
+siforcetiltx,sea_ice_x_force_per_unit_area_due_to_sea_surface_tilt,area:mean where sea_ice
+siforcetilty,sea_ice_y_force_per_unit_area_due_to_sea_surface_tilt,area:mean where sea_ice
+siforcecoriolx,sea_ice_x_force_per_unit_area_due_to_coriolis_effect,area:mean where sea_ice
+siforcecorioly,sea_ice_y_force_per_unit_area_due_to_coriolis_effect,area:mean where sea_ice
+siforceintstrx,sea_ice_x_internal_stress,area:mean where sea_ice
+siforceintstry,sea_ice_y_internal_stress,area:mean where sea_ice
+sicompstren,compressive_strength_of_sea_ice,area:mean where sea_ice
+sidivvel,divergence_of_sea_ice_velocity,area:mean where sea_ice
+sispeed,sea_ice_speed,area:mean where sea_ice
+sihc,sea_ice_temperature_expressed_as_heat_content,area:mean where sea_ice
+sisnhc,thermal_energy_content_of_surface_snow,area:mean where sea_ice
+sidconcth,tendency_of_sea_ice_area_fraction_due_to_thermodynamics,area:mean where sea
+sidconcdyn,tendency_of_sea_ice_area_fraction_due_to_dynamics,area:mean where sea
+sidmassth,tendency_of_sea_ice_amount_due_to_sea_ice_thermodynamics,area:mean where sea
+sidmassdyn,tendency_of_sea_ice_amount_due_to_sea_ice_dynamics,area:mean where sea
+sidmassgrowthwat,tendency_of_sea_ice_amount_due_to_frazil_ice_accumulation_in_leads,area:mean where sea
+sidmassgrowthbot,tendency_of_sea_ice_amount_due_to_congelation_ice_accumulation,area:mean where sea
+sidmasssi,tendency_of_sea_ice_amount_due_to_conversion_of_snow_to_sea_ice,area:mean where sea
+sidmassevapsubl,water_evapotranspiration_flux,area:mean where sea
+sidmassmelttop,tendency_of_sea_ice_amount_due_to_surface_melting,area:mean where sea
+sidmassmeltbot,tendency_of_sea_ice_amount_due_to_basal_melting,area:mean where sea
+sidmasslat,tendency_of_sea_ice_amount_due_to_lateral_melting,area:mean where sea
+sndmasssnf,snowfall_flux,area:mean where sea_ice
+sndmassmelt,surface_snow_melt_flux,area:mean where sea_ice
+siflswdbot,downwelling_shortwave_flux_in_sea_water_at_sea_ice_base,
+siflsensupbot,upward_sea_ice_basal_heat_flux,
+sifllatstop,surface_upward_latent_heat_flux,
+siflcondtop,surface_downward_sensible_heat_flux,area:mean where sea_ice
+siflcondbot,basal_downward_heat_flux_in_sea_ice,area:mean where sea_ice
+sipr,rainfall_flux,
+siflsaltbot,,
+siflfwbot,water_flux_into_sea_water_due_to_sea_ice_thermodynamics,
+sisaltmass,sea_ice_mass_content_of_salt,
+ardg,,
+vrdg,,
+dardg1dt,,
+dardg2dt,,
+dvirdgdt,,
+opening,,
+apond,,
+apond_ai,,
+hpond,,
+hpond_ai,,
+ipond,,
+ipond_ai,,
+apeff,,
+apeff_ai,,
+aicen,,
+vicen,,
+vsnon,,
+snowfracn,,
+fsurfn_ai,,
+fcondtopn_ai,,
+fmelttn_ai,,
+flatn_ai,,
+apondn,,
+hpondn,,
+apeffn,,
+Tinz,,
+Tsnz,,
