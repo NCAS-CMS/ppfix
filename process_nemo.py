@@ -24,10 +24,9 @@ nemo_folder = Path(NEMO_FOLDER).expanduser()
 target_folder = Path(TARGET_FOLDER).expanduser()
 metadata_file = Path(__file__).parent / 'metadata.jsonc'
 
-REPLACE = True  # If True, will replace existing files in target folder. If False, will skip them.
+REPLACE = False  # If True, will replace existing files in target folder. If False, will skip them.
 
 ##### END CONFIGURATION
-
 
 parts = nemo_folder.parts
 runid = parts[-3]

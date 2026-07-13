@@ -1,16 +1,7 @@
 import cf
 import time
-import os
-
 
 from fragmentation import check_fragmentation
-
-
-
-
-
-
-
 
 def rechunk_existing_netcdf(filename, outfilename, properties, kwchoices, chunks):
     """
@@ -27,7 +18,6 @@ def rechunk_existing_netcdf(filename, outfilename, properties, kwchoices, chunks
     - None
     """
   
-
     t1 = time.perf_counter()
     fields = cf.read(str(filename))
     tr = time.perf_counter() - t1
