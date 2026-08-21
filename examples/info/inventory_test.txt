@@ -1,0 +1,542 @@
+
+------------------------------------------------------------
+Inventory for /Volumes/Lawrence4TB/u-dz876/dz876a.pc1950jan. (cf=3.20.1)
+<CF Field: surface_air_pressure(time(124), latitude(1920), longitude(2560)) Pa>
+   CMIP6 table: Esubhr; CMS table: 6hr;  Temporal cell method: point; Zonal cell method: None; identity: surface_air_pressure; variable: ps
+   Cell methods: ['T:point']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__6hr__1950010106__point__surface_air_pressure__ps.nc
+<CF Field: wind_speed(time(124), height(1), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: unknown; CMS table: 6hr;  Temporal cell method: maximum; Zonal cell method: None; identity: wind_speed; variable: 
+   Cell methods: ['T:maximum']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__6hr__1950010103__maximum__wind_speed__.nc
+<CF Field: ertel_potential_vorticity(time(124), air_potential_temperature(1), latitude(1921), longitude(2560)) K m2 kg-1 s-1>
+   CMIP6 table: unknown; CMS table: 6hr;  Temporal cell method: point; Zonal cell method: None; identity: ertel_potential_vorticity; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__6hr__1950010106__point__ertel_potential_vorticity__.nc
+<CF Field: upward_air_velocity(time(124), air_pressure(8), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: unknown; CMS table: 6hr;  Temporal cell method: point; Zonal cell method: None; identity: upward_air_velocity; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__6hr__1950010106__point__upward_air_velocity__.nc
+<CF Field: specific_humidity(time(124), air_pressure(9), latitude(1921), longitude(2560)) 1>
+   CMIP6 table: unknown; CMS table: 6hr;  Temporal cell method: point; Zonal cell method: None; identity: specific_humidity; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__6hr__1950010106__point__specific_humidity__.nc
+<CF Field: long_name=HEAVYSIDE FN ON P LEV/UV GRID(time(124), air_pressure(6), latitude(1921), longitude(2560))>
+   CMIP6 table: E3hrPt; CMS table: 6hr;  Temporal cell method: point; Zonal cell method: None; identity: HEAVYSIDE_FN_ON_P_LEV_UV_GRID; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__6hr__1950010106__point__heavyside_fn_on_p_lev_uv_grid__.nc
+<CF Field: long_name=TOTAL MOISTURE FLUX U  RHO GRID(time(124), ncdim%dimension1(1), latitude(1920), longitude(2560))>
+   CMIP6 table: unknown; CMS table: 6hr;  Temporal cell method: point; Zonal cell method: None; identity: TOTAL_MOISTURE_FLUX_U_RHO_GRID; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__6hr__1950010106__point__total_moisture_flux_u_rho_grid__.nc
+<CF Field: long_name=TOTAL MOISTURE FLUX V  RHO GRID(time(124), ncdim%dimension1(1), latitude(1920), longitude(2560))>
+   CMIP6 table: unknown; CMS table: 6hr;  Temporal cell method: point; Zonal cell method: None; identity: TOTAL_MOISTURE_FLUX_V_RHO_GRID; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__6hr__1950010106__point__total_moisture_flux_v_rho_grid__.nc
+
+------------------------------------------------------------
+Inventory for /Volumes/Lawrence4TB/u-dz876/dz876a.p91950jan. (cf=3.20.1)
+<CF Field: toa_outgoing_longwave_flux(time(743), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: CFsubhr; CMS table: 1hr;  Temporal cell method: point; Zonal cell method: None; identity: toa_outgoing_longwave_flux; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__1hr__1950010101__point__toa_outgoing_longwave_flux__.nc
+<CF Field: eastward_wind(time(744), height(1), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: unknown; CMS table: 1hr;  Temporal cell method: point; Zonal cell method: None; identity: eastward_wind; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__1hr__1950010101__point__eastward_wind__.nc
+<CF Field: northward_wind(time(744), height(1), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: unknown; CMS table: 1hr;  Temporal cell method: point; Zonal cell method: None; identity: northward_wind; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__1hr__1950010101__point__northward_wind__.nc
+<CF Field: toa_outgoing_longwave_flux(time(744), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: CF3hr; CMS table: 1hr;  Temporal cell method: point; Zonal cell method: None; identity: toa_outgoing_longwave_flux; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__1hr__1950010101__point__toa_outgoing_longwave_flux__.nc
+<CF Field: stratiform_rainfall_flux(time(744), latitude(1920), longitude(2560)) kg m-2 s-1>
+   CMIP6 table: unknown; CMS table: 1hr;  Temporal cell method: mean; Zonal cell method: None; identity: stratiform_rainfall_flux; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__1hr__1950010100__mean__stratiform_rainfall_flux__.nc
+<CF Field: convective_rainfall_flux(time(744), latitude(1920), longitude(2560)) kg m-2 s-1>
+   CMIP6 table: APday; CMS table: 1hr;  Temporal cell method: mean; Zonal cell method: None; identity: convective_rainfall_flux; variable: prrc
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__1hr__1950010100__mean__convective_rainfall_flux__prrc.nc
+<CF Field: precipitation_flux(time(744), latitude(1920), longitude(2560)) kg m-2 s-1>
+   CMIP6 table: 1hr; CMS table: 1hr;  Temporal cell method: mean; Zonal cell method: None; identity: precipitation_flux; variable: pr
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__1hr__1950010100__mean__precipitation_flux__pr.nc
+
+------------------------------------------------------------
+Inventory for /Volumes/Lawrence4TB/u-dz876/dz876a.pe1950jan. (cf=3.20.1)
+<CF Field: surface_upward_water_flux(time(31), latitude(1920), longitude(2560)) kg m-2 s-1>
+   CMIP6 table: LPday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: surface_upward_water_flux; variable: evspsbl
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__surface_upward_water_flux__evspsbl.nc
+<CF Field: eastward_wind(time(31), air_pressure(17), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: GCday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: eastward_wind; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__eastward_wind__.nc
+<CF Field: northward_wind(time(31), air_pressure(17), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: GCday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: northward_wind; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__northward_wind__.nc
+<CF Field: air_temperature(time(31), air_pressure(17), latitude(1921), longitude(2560)) K>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: air_temperature; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__air_temperature__.nc
+<CF Field: specific_humidity(time(31), air_pressure(17), latitude(1921), longitude(2560)) 1>
+   CMIP6 table: GCAmonUV; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: specific_humidity; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__specific_humidity__.nc
+<CF Field: lagrangian_tendency_of_air_pressure(time(31), air_pressure(17), latitude(1921), longitude(2560)) Pa s-1>
+   CMIP6 table: GCAmonUV; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: lagrangian_tendency_of_air_pressure; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__lagrangian_tendency_of_air_pressure__.nc
+<CF Field: product_of_eastward_wind_and_specific_humidity(time(31), air_pressure(17), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: product_of_eastward_wind_and_specific_humidity; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__product_of_eastward_wind_and_specific_humidity__.nc
+<CF Field: product_of_northward_wind_and_specific_humidity(time(31), air_pressure(17), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: product_of_northward_wind_and_specific_humidity; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__product_of_northward_wind_and_specific_humidity__.nc
+<CF Field: product_of_specific_humidity_and_omega(time(31), air_pressure(17), latitude(1921), longitude(2560)) Pa s-1>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: product_of_specific_humidity_and_omega; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__product_of_specific_humidity_and_omega__.nc
+<CF Field: long_name=HEAVYSIDE FN ON P LEV/UV GRID(time(31), air_pressure(17), latitude(1921), longitude(2560))>
+   CMIP6 table: GCday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: HEAVYSIDE_FN_ON_P_LEV_UV_GRID; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__heavyside_fn_on_p_lev_uv_grid__.nc
+
+------------------------------------------------------------
+Inventory for /Volumes/Lawrence4TB/u-dz876/dz876a.p41950jan. (cf=3.20.1)
+<CF Field: long_name=DENSITY*R*R AFTER TIMESTEP(time(1), atmosphere_hybrid_height_coordinate(85), latitude(1920), longitude(2560))>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: None; identity: DENSITY_R_R_AFTER_TIMESTEP; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__monthly__195001__mean__density_r_r_after_timestep__.nc
+<CF Field: tropopause_altitude(time(1), height(1), latitude(1920), longitude(2560)) m>
+   CMIP6 table: AEmon; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: None; identity: tropopause_altitude; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__monthly__195001__mean__tropopause_altitude__.nc
+
+------------------------------------------------------------
+Inventory for /Volumes/Lawrence4TB/u-dz876/dz876a.pb1950jan. (cf=3.20.1)
+<CF Field: air_potential_temperature(time(31), latitude(1921), longitude(2560)) K>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: point; Zonal cell method: None; identity: air_potential_temperature; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1921, 2560); Possible Chunking: (1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500102__point__air_potential_temperature__.nc
+<CF Field: air_pressure_at_sea_level(time(31), latitude(1920), longitude(2560)) Pa>
+   CMIP6 table: APday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: air_pressure_at_sea_level; variable: psl
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__air_pressure_at_sea_level__psl.nc
+<CF Field: eastward_wind(time(31), air_pressure(1), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: GCday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: eastward_wind; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__eastward_wind__.nc
+<CF Field: northward_wind(time(31), air_pressure(1), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: GCday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: northward_wind; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__northward_wind__.nc
+<CF Field: geopotential_height(time(31), air_pressure(17), latitude(1921), longitude(2560)) m>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: geopotential_height; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__geopotential_height__.nc
+<CF Field: long_name=HEAVYSIDE FN ON P LEV/UV GRID(time(31), air_pressure(7), latitude(1921), longitude(2560))>
+   CMIP6 table: GCday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: HEAVYSIDE_FN_ON_P_LEV_UV_GRID; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__heavyside_fn_on_p_lev_uv_grid__.nc
+
+------------------------------------------------------------
+Inventory for /Volumes/Lawrence4TB/u-dz876/dz876a.p81950jan. (cf=3.20.1)
+<CF Field: surface_temperature(time(248), latitude(1920), longitude(2560)) K>
+   CMIP6 table: E3hrPt; CMS table: 3hr;  Temporal cell method: point; Zonal cell method: None; identity: surface_temperature; variable: ts
+   Cell methods: ['T:point']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010103__point__surface_temperature__ts.nc
+<CF Field: surface_net_downward_shortwave_flux(time(247), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: CFsubhr; CMS table: 3hr;  Temporal cell method: point; Zonal cell method: None; identity: surface_net_downward_shortwave_flux; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010103__point__surface_net_downward_shortwave_flux__.nc
+<CF Field: surface_net_downward_longwave_flux(time(247), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: CFsubhr; CMS table: 3hr;  Temporal cell method: point; Zonal cell method: None; identity: surface_net_downward_longwave_flux; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010103__point__surface_net_downward_longwave_flux__.nc
+<CF Field: long_name=SURFACE SENSIBLE  HEAT FLUX     W/M2(time(248), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: CFsubhr; CMS table: 3hr;  Temporal cell method: point; Zonal cell method: None; identity: SURFACE_SENSIBLE_HEAT_FLUX_W_M2; variable: hfss
+   Cell methods: ['T:point']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010103__point__surface_sensible_heat_flux_w_m2__hfss.nc
+<CF Field: surface_upward_latent_heat_flux(time(248), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: CFsubhr; CMS table: 3hr;  Temporal cell method: point; Zonal cell method: None; identity: surface_upward_latent_heat_flux; variable: hfls
+   Cell methods: ['T:point']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010103__point__surface_upward_latent_heat_flux__hfls.nc
+<CF Field: air_temperature(time(248), height(1), latitude(1920), longitude(2560)) K>
+   CMIP6 table: CFsubhr; CMS table: 3hr;  Temporal cell method: point; Zonal cell method: None; identity: air_temperature; variable: tas
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010103__point__air_temperature__tas.nc
+<CF Field: long_name=SPECIFIC HUMIDITY  AT 1.5M(time(248), height(1), latitude(1920), longitude(2560))>
+   CMIP6 table: CFsubhr; CMS table: 3hr;  Temporal cell method: point; Zonal cell method: None; identity: SPECIFIC_HUMIDITY_AT_1_5M; variable: huss
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010103__point__specific_humidity_at_1_5m__huss.nc
+<CF Field: geopotential_height(time(248), air_pressure(7), latitude(1920), longitude(2560)) m>
+   CMIP6 table: unknown; CMS table: 3hr;  Temporal cell method: point; Zonal cell method: None; identity: geopotential_height; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010103__point__geopotential_height__.nc
+<CF Field: air_pressure_at_sea_level(time(248), latitude(1920), longitude(2560)) Pa>
+   CMIP6 table: E3hrPt; CMS table: 3hr;  Temporal cell method: point; Zonal cell method: None; identity: air_pressure_at_sea_level; variable: psl
+   Cell methods: ['T:point']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010103__point__air_pressure_at_sea_level__psl.nc
+<CF Field: eastward_wind(time(248), air_pressure(10), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: E3hrPt; CMS table: 3hr;  Temporal cell method: point; Zonal cell method: None; identity: eastward_wind; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010103__point__eastward_wind__.nc
+<CF Field: northward_wind(time(248), air_pressure(10), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: E3hrPt; CMS table: 3hr;  Temporal cell method: point; Zonal cell method: None; identity: northward_wind; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010103__point__northward_wind__.nc
+<CF Field: air_temperature(time(248), air_pressure(11), latitude(1921), longitude(2560)) K>
+   CMIP6 table: unknown; CMS table: 3hr;  Temporal cell method: point; Zonal cell method: None; identity: air_temperature; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010103__point__air_temperature__.nc
+<CF Field: specific_humidity(time(248), air_pressure(11), latitude(1921), longitude(2560)) 1>
+   CMIP6 table: unknown; CMS table: 3hr;  Temporal cell method: point; Zonal cell method: None; identity: specific_humidity; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010103__point__specific_humidity__.nc
+<CF Field: long_name=RELATIVE HUMIDITY ON P LEV/UV GRID(time(248), air_pressure(10), latitude(1921), longitude(2560))>
+   CMIP6 table: unknown; CMS table: 3hr;  Temporal cell method: point; Zonal cell method: None; identity: RELATIVE_HUMIDITY_ON_P_LEV_UV_GRID; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010103__point__relative_humidity_on_p_lev_uv_grid__.nc
+<CF Field: geopotential_height(time(248), air_pressure(10), latitude(1921), longitude(2560)) m>
+   CMIP6 table: unknown; CMS table: 3hr;  Temporal cell method: point; Zonal cell method: None; identity: geopotential_height; variable: 
+   Cell methods: ['T:point']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010103__point__geopotential_height__.nc
+
+------------------------------------------------------------
+Inventory for /Volumes/Lawrence4TB/u-dz876/dz876a.pa1950jan. (cf=3.20.1)
+<CF Field: surface_temperature(time(31), latitude(1920), longitude(2560)) K>
+   CMIP6 table: APday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: surface_temperature; variable: tsns
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__surface_temperature__tsns.nc
+<CF Field: sea_ice_area_fraction(time(31), latitude(1920), longitude(2560)) 1>
+   CMIP6 table: SIday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: sea_ice_area_fraction; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__sea_ice_area_fraction__.nc
+<CF Field: sea_ice_thickness(time(31), latitude(1920), longitude(2560)) m>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: sea_ice_thickness; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__sea_ice_thickness__.nc
+<CF Field: stratiform_rainfall_flux(time(31), latitude(1920), longitude(2560)) kg m-2 s-1>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: stratiform_rainfall_flux; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__stratiform_rainfall_flux__.nc
+<CF Field: convective_rainfall_flux(time(31), latitude(1920), longitude(2560)) kg m-2 s-1>
+   CMIP6 table: APday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: convective_rainfall_flux; variable: prrc
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__convective_rainfall_flux__prrc.nc
+<CF Field: precipitation_flux(time(31), latitude(1920), longitude(2560)) kg m-2 s-1>
+   CMIP6 table: 1hr; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: precipitation_flux; variable: pr
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__precipitation_flux__pr.nc
+<CF Field: long_name=UPDRAUGHT MASS FLUX (Pa/s)(time(31), atmosphere_hybrid_height_coordinate(52), latitude(1920), longitude(2560)) Pa s-1>
+   CMIP6 table: APmonLev; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: UPDRAUGHT_MASS_FLUX_Pa_s; variable: mcu
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__updraught_mass_flux_pa_s__mcu.nc
+<CF Field: long_name=U INCREMENT MS-2 ( P GRID)(time(31), atmosphere_hybrid_height_coordinate(52), latitude(1920), longitude(2560))>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: U_INCREMENT_MS_2_P_GRID; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__u_increment_ms_2_p_grid__.nc
+<CF Field: long_name=V INCREMENT MS-2         ( P GRID)(time(31), atmosphere_hybrid_height_coordinate(52), latitude(1920), longitude(2560))>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: V_INCREMENT_MS_2_P_GRID; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__v_increment_ms_2_p_grid__.nc
+<CF Field: long_name=SOIL MOISTURE CONTENT(time(31), latitude(1920), longitude(2560)) kg m-2>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: SOIL_MOISTURE_CONTENT; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__soil_moisture_content__.nc
+<CF Field: surface_runoff_flux(time(31), latitude(1920), longitude(2560)) kg m-2 s-1>
+   CMIP6 table: LPday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: surface_runoff_flux; variable: mrros
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__surface_runoff_flux__mrros.nc
+<CF Field: subsurface_runoff_flux(time(31), latitude(1920), longitude(2560)) kg m-2 s-1>
+   CMIP6 table: LPday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: subsurface_runoff_flux; variable: mrrob
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__subsurface_runoff_flux__mrrob.nc
+<CF Field: eastward_wind(time(31), air_pressure(2), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: GCday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: eastward_wind; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__eastward_wind__.nc
+<CF Field: northward_wind(time(31), air_pressure(2), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: GCday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: northward_wind; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__northward_wind__.nc
+<CF Field: long_name=HEAVYSIDE FN ON P LEV/UV GRID(time(31), air_pressure(2), latitude(1921), longitude(2560))>
+   CMIP6 table: GCday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: HEAVYSIDE_FN_ON_P_LEV_UV_GRID; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__heavyside_fn_on_p_lev_uv_grid__.nc
+
+------------------------------------------------------------
+Inventory for /Volumes/Lawrence4TB/u-dz876/dz876a.pk1950jan. (cf=3.20.1)
+<CF Field: long_name=CUMULATIVE FRACTION TRANSPIRATION(time(248), model_level_number(4), latitude(1920), longitude(2560))>
+   CMIP6 table: unknown; CMS table: 3hr;  Temporal cell method: mean; Zonal cell method: None; identity: CUMULATIVE_FRACTION_TRANSPIRATION; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010101__mean__cumulative_fraction_transpiration__.nc
+<CF Field: gross_primary_productivity_of_carbon(time(248), latitude(1920), longitude(2560)) kg m-2 s-1>
+   CMIP6 table: LP3hr; CMS table: 3hr;  Temporal cell method: mean; Zonal cell method: None; identity: gross_primary_productivity_of_carbon; variable: gpp
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010101__mean__gross_primary_productivity_of_carbon__gpp.nc
+<CF Field: long_name=UM_m01s03i539_vn1308(time(248), latitude(1920), longitude(2560))>
+   CMIP6 table: LPday; CMS table: 3hr;  Temporal cell method: mean; Zonal cell method: None; identity: UM_m01s03i539_vn1308; variable: tran
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010101__mean__um_m01s03i539_vn1308__tran.nc
+<CF Field: precipitation_flux(time(248), latitude(1920), longitude(2560)) kg m-2 s-1>
+   CMIP6 table: 1hr; CMS table: 3hr;  Temporal cell method: mean; Zonal cell method: None; identity: precipitation_flux; variable: pr
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__3hr__1950010101__mean__precipitation_flux__pr.nc
+
+------------------------------------------------------------
+Inventory for /Volumes/Lawrence4TB/u-dz876/dz876a.pg1950jan. (cf=3.20.1)
+<CF Field: long_name=EASTWARD FLUX - SPECTRAL PSEUDOMOM.(time(1), atmosphere_hybrid_height_coordinate(63), latitude(1920), longitude(2560))>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: None; identity: EASTWARD_FLUX_SPECTRAL_PSEUDOMOM; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__monthly__195001__mean__eastward_flux_spectral_pseudomom__.nc
+<CF Field: long_name=SOUTHWARD FLUX - SPECTRAL PSEUDOMOM.(time(1), atmosphere_hybrid_height_coordinate(63), latitude(1921), longitude(2560))>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: None; identity: SOUTHWARD_FLUX_SPECTRAL_PSEUDOMOM; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__monthly__195001__mean__southward_flux_spectral_pseudomom__.nc
+<CF Field: long_name=WESTWARD FLUX - SPECTRAL PSEUDOMOM.(time(1), atmosphere_hybrid_height_coordinate(63), latitude(1920), longitude(2560))>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: None; identity: WESTWARD_FLUX_SPECTRAL_PSEUDOMOM; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__monthly__195001__mean__westward_flux_spectral_pseudomom__.nc
+<CF Field: long_name=NORTHWARD FLUX - SPECTRAL PSEUDOMOM.(time(1), atmosphere_hybrid_height_coordinate(63), latitude(1921), longitude(2560))>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: None; identity: NORTHWARD_FLUX_SPECTRAL_PSEUDOMOM; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__monthly__195001__mean__northward_flux_spectral_pseudomom__.nc
+<CF Field: long_name=EASTWARD FORCE FROM SPECTRAL GW(time(1), atmosphere_hybrid_height_coordinate(63), latitude(1920), longitude(2560))>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: None; identity: EASTWARD_FORCE_FROM_SPECTRAL_GW; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__monthly__195001__mean__eastward_force_from_spectral_gw__.nc
+<CF Field: long_name=NORTHWARD FORCE FROM SPECTRAL GW(time(1), atmosphere_hybrid_height_coordinate(63), latitude(1921), longitude(2560))>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: None; identity: NORTHWARD_FORCE_FROM_SPECTRAL_GW; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__monthly__195001__mean__northward_force_from_spectral_gw__.nc
+<CF Field: long_name=E. FLUX SPECTRAL PSEUDOMOM. P LEVS(time(1), air_pressure(36), latitude(1921), longitude(1))>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: mean; identity: E_FLUX_SPECTRAL_PSEUDOMOM_P_LEVS; variable: 
+   Cell methods: ['X:mean', 'T:mean']; Current Chunking: (1, 1, 1921, 1); Possible Chunking: None
+   Output file?: hrcm_n1280o12_control_aaaaa__monthlyzm__195001__mean__mean__e_flux_spectral_pseudomom_p_levs__.nc
+<CF Field: long_name=W. FLUX SPECTRAL PSEUDOMOM. P LEVS(time(1), air_pressure(36), latitude(1921), longitude(1))>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: mean; identity: W_FLUX_SPECTRAL_PSEUDOMOM_P_LEVS; variable: 
+   Cell methods: ['X:mean', 'T:mean']; Current Chunking: (1, 1, 1921, 1); Possible Chunking: None
+   Output file?: hrcm_n1280o12_control_aaaaa__monthlyzm__195001__mean__mean__w_flux_spectral_pseudomom_p_levs__.nc
+<CF Field: long_name=EAST. FORCE FROM SPECTRAL GW P LEVS(time(1), air_pressure(36), latitude(1921), longitude(1))>
+   CMIP6 table: EmonZ; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: mean; identity: EAST_FORCE_FROM_SPECTRAL_GW_P_LEVS; variable: utendnogw
+   Cell methods: ['X:mean', 'T:mean']; Current Chunking: (1, 1, 1921, 1); Possible Chunking: None
+   Output file?: hrcm_n1280o12_control_aaaaa__monthlyzm__195001__mean__mean__east_force_from_spectral_gw_p_levs__utendnogw.nc
+<CF Field: long_name=U-ACCEL FROM SATURATED STRESS(time(1), atmosphere_hybrid_height_coordinate(85), latitude(1920), longitude(2560))>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: None; identity: U_ACCEL_FROM_SATURATED_STRESS; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__monthly__195001__mean__u_accel_from_saturated_stress__.nc
+<CF Field: long_name=V-ACCEL FROM SATURATED STRESS(time(1), atmosphere_hybrid_height_coordinate(85), latitude(1921), longitude(2560))>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: None; identity: V_ACCEL_FROM_SATURATED_STRESS; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__monthly__195001__mean__v_accel_from_saturated_stress__.nc
+<CF Field: long_name=X COMPONENT OF GW SATURATION STRESS(time(1), atmosphere_hybrid_height_coordinate(85), latitude(1920), longitude(2560))>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: None; identity: X_COMPONENT_OF_GW_SATURATION_STRESS; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__monthly__195001__mean__x_component_of_gw_saturation_stress__.nc
+<CF Field: long_name=Y COMPONENT OF GW SATURATION STRESS(time(1), atmosphere_hybrid_height_coordinate(85), latitude(1921), longitude(2560))>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: None; identity: Y_COMPONENT_OF_GW_SATURATION_STRESS; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__monthly__195001__mean__y_component_of_gw_saturation_stress__.nc
+<CF Field: long_name=X COMPT OF GRAV. WAVE STRESS P LEVS(time(1), air_pressure(36), latitude(1921), longitude(1))>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: mean; identity: X_COMPT_OF_GRAV_WAVE_STRESS_P_LEVS; variable: 
+   Cell methods: ['X:mean', 'T:mean']; Current Chunking: (1, 1, 1921, 1); Possible Chunking: None
+   Output file?: hrcm_n1280o12_control_aaaaa__monthlyzm__195001__mean__mean__x_compt_of_grav_wave_stress_p_levs__.nc
+<CF Field: long_name=U-ACCEL FROM SATURATED STRESS P LEVS(time(1), air_pressure(36), latitude(1921), longitude(1))>
+   CMIP6 table: EdayZ; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: mean; identity: U_ACCEL_FROM_SATURATED_STRESS_P_LEVS; variable: utendogw
+   Cell methods: ['X:mean', 'T:mean']; Current Chunking: (1, 1, 1921, 1); Possible Chunking: None
+   Output file?: hrcm_n1280o12_control_aaaaa__monthlyzm__195001__mean__mean__u_accel_from_saturated_stress_p_levs__utendogw.nc
+<CF Field: eastward_wind(time(1), air_pressure(36), latitude(1921), longitude(1)) m s-1>
+   CMIP6 table: EdayZ; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: mean; identity: eastward_wind; variable: 
+   Cell methods: ['X:mean', 'T:mean']; Current Chunking: (1, 1, 1921, 1); Possible Chunking: None
+   Output file?: hrcm_n1280o12_control_aaaaa__monthlyzm__195001__mean__mean__eastward_wind__.nc
+<CF Field: northward_wind(time(1), air_pressure(36), latitude(1921), longitude(1)) m s-1>
+   CMIP6 table: EdayZ; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: mean; identity: northward_wind; variable: 
+   Cell methods: ['X:mean', 'T:mean']; Current Chunking: (1, 1, 1921, 1); Possible Chunking: None
+   Output file?: hrcm_n1280o12_control_aaaaa__monthlyzm__195001__mean__mean__northward_wind__.nc
+<CF Field: upward_air_velocity(time(1), air_pressure(36), latitude(1921), longitude(1)) m s-1>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: mean; identity: upward_air_velocity; variable: 
+   Cell methods: ['X:mean', 'T:mean']; Current Chunking: (1, 1, 1921, 1); Possible Chunking: None
+   Output file?: hrcm_n1280o12_control_aaaaa__monthlyzm__195001__mean__mean__upward_air_velocity__.nc
+<CF Field: air_temperature(time(1), air_pressure(36), latitude(1921), longitude(1)) K>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: mean; identity: air_temperature; variable: 
+   Cell methods: ['X:mean', 'T:mean']; Current Chunking: (1, 1, 1921, 1); Possible Chunking: None
+   Output file?: hrcm_n1280o12_control_aaaaa__monthlyzm__195001__mean__mean__air_temperature__.nc
+<CF Field: specific_humidity(time(1), air_pressure(36), latitude(1921), longitude(1)) 1>
+   CMIP6 table: unknown; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: mean; identity: specific_humidity; variable: 
+   Cell methods: ['X:mean', 'T:mean']; Current Chunking: (1, 1, 1921, 1); Possible Chunking: None
+   Output file?: hrcm_n1280o12_control_aaaaa__monthlyzm__195001__mean__mean__specific_humidity__.nc
+<CF Field: long_name=HEAVYSIDE FN ON P LEV/UV GRID(time(1), air_pressure(36), latitude(1921), longitude(1))>
+   CMIP6 table: APmonZ; CMS table: monthly;  Temporal cell method: mean; Zonal cell method: mean; identity: HEAVYSIDE_FN_ON_P_LEV_UV_GRID; variable: 
+   Cell methods: ['X:mean', 'T:mean']; Current Chunking: (1, 1, 1921, 1); Possible Chunking: None
+   Output file?: hrcm_n1280o12_control_aaaaa__monthlyzm__195001__mean__mean__heavyside_fn_on_p_lev_uv_grid__.nc
+
+------------------------------------------------------------
+Inventory for /Volumes/Lawrence4TB/u-dz876/dz876a.pd1950jan. (cf=3.20.1)
+<CF Field: air_pressure(time(31), atmosphere_hybrid_height_coordinate(52), latitude(1920), longitude(2560)) Pa>
+   CMIP6 table: APdayLev; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: air_pressure; variable: phalf
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__air_pressure__phalf.nc
+<CF Field: air_pressure(time(31), atmosphere_hybrid_height_coordinate(52), latitude(1920), longitude(2560)) Pa>
+   CMIP6 table: APdayLev; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: air_pressure; variable: pfull
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__air_pressure__pfull.nc
+<CF Field: surface_net_downward_shortwave_flux(time(31), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: APday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: surface_net_downward_shortwave_flux; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__surface_net_downward_shortwave_flux__.nc
+<CF Field: surface_net_downward_shortwave_flux(time(31), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: surface_net_downward_shortwave_flux; variable: 
+   Cell methods: ['?:mean', 'T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__surface_net_downward_shortwave_flux__.nc
+<CF Field: surface_downwelling_shortwave_flux_in_air_assuming_clear_sky(time(31), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: APday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: surface_downwelling_shortwave_flux_in_air_assuming_clear_sky; variable: rsdscs
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__surface_downwelling_shortwave_flux_in_air_assuming_clear_sky__rsdscs.nc
+<CF Field: surface_upwelling_shortwave_flux_in_air_assuming_clear_sky(time(31), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: APday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: surface_upwelling_shortwave_flux_in_air_assuming_clear_sky; variable: rsuscs
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__surface_upwelling_shortwave_flux_in_air_assuming_clear_sky__rsuscs.nc
+<CF Field: surface_downwelling_shortwave_flux_in_air(time(31), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: APday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: surface_downwelling_shortwave_flux_in_air; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__surface_downwelling_shortwave_flux_in_air__.nc
+<CF Field: long_name=NET DN SW O SEA FLX BLW 690NM:SEA MN(time(31), latitude(1920), longitude(2560))>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: NET_DN_SW_O_SEA_FLX_BLW_690NM_SEA_MN; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__net_dn_sw_o_sea_flx_blw_690nm_sea_mn__.nc
+<CF Field: surface_net_downward_longwave_flux(time(31), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: APday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: surface_net_downward_longwave_flux; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__surface_net_downward_longwave_flux__.nc
+<CF Field: surface_net_downward_longwave_flux(time(31), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: surface_net_downward_longwave_flux; variable: 
+   Cell methods: ['?:mean', 'T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__surface_net_downward_longwave_flux__.nc
+<CF Field: cloud_area_fraction(time(31), latitude(1920), longitude(2560)) 1>
+   CMIP6 table: APday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: cloud_area_fraction; variable: clt
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__cloud_area_fraction__clt.nc
+<CF Field: surface_downwelling_longwave_flux_in_air(time(31), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: APday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: surface_downwelling_longwave_flux_in_air; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__surface_downwelling_longwave_flux_in_air__.nc
+<CF Field: surface_downwelling_longwave_flux_in_air_assuming_clear_sky(time(31), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: APday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: surface_downwelling_longwave_flux_in_air_assuming_clear_sky; variable: rldscs
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__surface_downwelling_longwave_flux_in_air_assuming_clear_sky__rldscs.nc
+<CF Field: long_name=SURFACE SENSIBLE  HEAT FLUX     W/M2(time(31), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: APday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: SURFACE_SENSIBLE_HEAT_FLUX_W_M2; variable: hfss
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__surface_sensible_heat_flux_w_m2__hfss.nc
+<CF Field: eastward_wind(time(31), height(1), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: eastward_wind; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__eastward_wind__.nc
+<CF Field: northward_wind(time(31), height(1), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: northward_wind; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__northward_wind__.nc
+<CF Field: wind_speed(time(31), height(1), latitude(1921), longitude(2560)) m s-1>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: maximum; Zonal cell method: None; identity: wind_speed; variable: 
+   Cell methods: ['T:maximum']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__maximum__wind_speed__.nc
+<CF Field: surface_upward_sensible_heat_flux(time(31), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: surface_upward_sensible_heat_flux; variable: 
+   Cell methods: ['?:mean', 'T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__surface_upward_sensible_heat_flux__.nc
+<CF Field: surface_upward_latent_heat_flux(time(31), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: APday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: surface_upward_latent_heat_flux; variable: hfls
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__surface_upward_latent_heat_flux__hfls.nc
+<CF Field: air_temperature(time(31), height(1), latitude(1920), longitude(2560)) K>
+   CMIP6 table: 1hr; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: air_temperature; variable: tas
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__air_temperature__tas.nc
+<CF Field: air_temperature(time(31), height(1), latitude(1920), longitude(2560)) K>
+   CMIP6 table: APmon; CMS table: daily;  Temporal cell method: minimum; Zonal cell method: None; identity: air_temperature; variable: tasmin
+   Cell methods: ['T:minimum']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__minimum__air_temperature__tasmin.nc
+<CF Field: air_temperature(time(31), height(1), latitude(1920), longitude(2560)) K>
+   CMIP6 table: APmon; CMS table: daily;  Temporal cell method: maximum; Zonal cell method: None; identity: air_temperature; variable: tasmax
+   Cell methods: ['T:maximum']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__maximum__air_temperature__tasmax.nc
+<CF Field: long_name=SPECIFIC HUMIDITY  AT 1.5M(time(31), height(1), latitude(1920), longitude(2560))>
+   CMIP6 table: APday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: SPECIFIC_HUMIDITY_AT_1_5M; variable: huss
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__specific_humidity_at_1_5m__huss.nc
+<CF Field: relative_humidity(time(31), height(1), latitude(1920), longitude(2560)) %>
+   CMIP6 table: AP6hr; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: relative_humidity; variable: hurs
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__relative_humidity__hurs.nc
+<CF Field: water_evaporation_flux_from_soil(time(31), latitude(1920), longitude(2560)) kg m-2 s-1>
+   CMIP6 table: LPmon; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: water_evaporation_flux_from_soil; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__water_evaporation_flux_from_soil__.nc
+<CF Field: water_evaporation_flux_from_canopy(time(31), ncdim%dimension1(1), latitude(1920), longitude(2560)) kg m-2 s-1>
+   CMIP6 table: LPmon; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: water_evaporation_flux_from_canopy; variable: evspsblveg
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__water_evaporation_flux_from_canopy__evspsblveg.nc
+<CF Field: long_name=TURBULENT MIXING HT AFTER B.LAYER m(time(31), ncdim%dimension1(1), latitude(1920), longitude(2560))>
+   CMIP6 table: APday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: TURBULENT_MIXING_HT_AFTER_B_LAYER_m; variable: zmla
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__turbulent_mixing_ht_after_b_layer_m__zmla.nc
+<CF Field: long_name=STABLE BL INDICATOR(time(31), latitude(1920), longitude(2560))>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: STABLE_BL_INDICATOR; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__stable_bl_indicator__.nc
+<CF Field: long_name=WELL_MIXED BL INDICATOR(time(31), latitude(1920), longitude(2560))>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: WELL_MIXED_BL_INDICATOR; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__well_mixed_bl_indicator__.nc
+<CF Field: long_name=DECOUPLED SC. OVER CU. INDICATOR(time(31), latitude(1920), longitude(2560))>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: DECOUPLED_SC_OVER_CU_INDICATOR; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__decoupled_sc_over_cu_indicator__.nc
+<CF Field: long_name=CUMULUS-CAPPED BL INDICATOR(time(31), latitude(1920), longitude(2560))>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: CUMULUS_CAPPED_BL_INDICATOR; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__cumulus_capped_bl_indicator__.nc
+<CF Field: toa_outgoing_longwave_flux(time(31), latitude(1920), longitude(2560)) W m-2>
+   CMIP6 table: APmon; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: toa_outgoing_longwave_flux; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__toa_outgoing_longwave_flux__.nc
+<CF Field: long_name=10 METRE NEUTRAL WIND U-COMP B GRID(time(31), height(1), latitude(1921), longitude(2560))>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: 10_METRE_NEUTRAL_WIND_U_COMP_B_GRID; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__10_metre_neutral_wind_u_comp_b_grid__.nc
+<CF Field: long_name=10 METRE NEUTRAL WIND V-COMP B GRID(time(31), height(1), latitude(1921), longitude(2560))>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: 10_METRE_NEUTRAL_WIND_V_COMP_B_GRID; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__10_metre_neutral_wind_v_comp_b_grid__.nc
+<CF Field: long_name=10 METRE NEUTRAL WIND SPEED B GRID(time(31), height(1), latitude(1921), longitude(2560))>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: 10_METRE_NEUTRAL_WIND_SPEED_B_GRID; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__10_metre_neutral_wind_speed_b_grid__.nc
+<CF Field: long_name=10 METRE NEUTRAL WIND SPEED B GRID(time(31), height(1), latitude(1921), longitude(2560))>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: maximum; Zonal cell method: None; identity: 10_METRE_NEUTRAL_WIND_SPEED_B_GRID; variable: 
+   Cell methods: ['T:maximum']; Current Chunking: (1, 1, 1921, 2560); Possible Chunking: (1, 1, 961, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__maximum__10_metre_neutral_wind_speed_b_grid__.nc
+<CF Field: surface_snow_amount(time(31), latitude(1920), longitude(2560)) kg m-2>
+   CMIP6 table: unknown; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: surface_snow_amount; variable: 
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__surface_snow_amount__.nc
+<CF Field: canopy_water_amount(time(31), ncdim%dimension1(1), latitude(1920), longitude(2560)) kg m-2>
+   CMIP6 table: LPday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: canopy_water_amount; variable: cw
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__canopy_water_amount__cw.nc
+<CF Field: moisture_content_of_soil_layer(time(31), model_level_number(4), latitude(1920), longitude(2560)) kg m-2>
+   CMIP6 table: LPmon; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: moisture_content_of_soil_layer; variable: mrsos
+   Cell methods: ['T:mean']; Current Chunking: (1, 1, 1920, 2560); Possible Chunking: (1, 1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__moisture_content_of_soil_layer__mrsos.nc
+<CF Field: air_pressure_at_sea_level(time(31), latitude(1920), longitude(2560)) Pa>
+   CMIP6 table: APday; CMS table: daily;  Temporal cell method: mean; Zonal cell method: None; identity: air_pressure_at_sea_level; variable: psl
+   Cell methods: ['T:mean']; Current Chunking: (1, 1920, 2560); Possible Chunking: (1, 960, 1280)
+   Output file?: hrcm_n1280o12_control_aaaaa__daily__19500101__mean__air_pressure_at_sea_level__psl.nc

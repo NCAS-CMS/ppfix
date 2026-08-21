@@ -1,9 +1,7 @@
-import time
-import cf
-import json5
+import configparser
 from pathlib import Path
 
-from rechunk_file import rechunk_existing_netcdf
+from ppfix.rechunk_file import rechunk_existing_netcdf
 
 ###### USER CONFIGURATION 
 
@@ -22,7 +20,8 @@ O12CHUNKS = (1660,601) #o12 grid is 4322x3606, so this results in 3x6 chunks, wh
 
 nemo_folder = Path(NEMO_FOLDER).expanduser()
 target_folder = Path(TARGET_FOLDER).expanduser()
-metadata_file = Path(__file__).parent / 'metadata.jsonc'
+metadata_file = Path(__file__).parent / 'metadata.conf'
+metadata_file = Path(__file__).parent / 'metadata.conf'
 
 REPLACE = False  # If True, will replace existing files in target folder. If False, will skip them.
 
@@ -32,18 +31,19 @@ parts = nemo_folder.parts
 runid = parts[-3]
 
 
-metadata = json5.load(metadata_file.open())
+metadata = configparser.ConfigParser(interpolation=None)
+metadata.read(metadata_file)
 
 metadata['run_specific']['runid'] = runid
 files = nemo_folder.glob('*.nc')
-dlines = metadata.pop('descriptionLines')
-metadata['description'] = '\n'.join(dlines)
+description = metadata['description']['text'].strip()
 
-output_metadata = {k:v for k,v in metadata['HRCM General'].items()}
-output_metadata['description'] = metadata['description']
+output_metadata = {k: v for k, v in metadata['HRCM General'].items()}
+output_metadata['description'] = description
 
-if runid in metadata['run_specific']['variant_id']:
-    output_metadata['variant_id'] = metadata['run_specific']['variant_id'][runid]
+variant_map = metadata['run_specific.variant_id']
+if runid in variant_map:
+    output_metadata['variant_id'] = variant_map[runid]
 
 for f in files:
     print('Examining: ',f)

@@ -2,9 +2,9 @@ import cf
 import contextlib
 import time
 from pathlib import Path
-from fragmentation import check_fragmentation
+from postproc.fragmentation import check_fragmentation
 
-from rechunk_file import rechunk_existing_netcdf
+from postproc.rechunk_file import rechunk_existing_netcdf
 
 
 TEST_FILE = '~/data/Lawrence4TB/u-dz876/NEMO/dz876o_1d_19500101_19500101_grid_T.nc'

@@ -21,10 +21,10 @@ from cf import Units
 import configparser
 import uuid
 import csv
-from heights import fix_heights
-from ice import fix_ice_indices
-from ocean import fix_ocean_indices
-from zmean import fix_zmeans
+from historical_code.grenville.bin.heights import fix_heights
+from historical_code.grenville.bin.ice import fix_ice_indices
+from historical_code.grenville.bin.ocean import fix_ocean_indices
+from historical_code.grenville.bin.zmean import fix_zmeans
 
 # File patterns
 cice_pattern = re.compile(r'[a-z]{2}[0-9]{3}[i][_][0-9]')

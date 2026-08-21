@@ -1,0 +1,14 @@
+.DS_Store
+._*
+
+.pytest_cache/
+__pycache__/
+*.py[cod]
+
+.vscode/
+
+*.egg-info/
+build/
+dist/
+
+runlog.log

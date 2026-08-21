@@ -1,0 +1,23 @@
+name: umcyclepp
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.12
+  - netcdf4
+  - udunits2
+  - zarr
+  - esmpy>=8.7.0
+  - matplotlib
+  - pandas
+  - healpix
+  - esmf
+  - ipython
+  - json5
+  - pip
+  - pip:
+      - https://github.com/davidhassell/cfdm/archive/refs/heads/bnl-hires.zip
+      - https://github.com/davidhassell/cf-python/archive/refs/heads/bnl-hires.zip
+
+
+  

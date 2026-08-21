@@ -1,7 +1,7 @@
 import cf
 import time
 
-from fragmentation import check_fragmentation
+from ppfix.fragmentation import check_fragmentation
 
 def rechunk_existing_netcdf(filename, outfilename, properties, kwchoices, chunks):
     """
