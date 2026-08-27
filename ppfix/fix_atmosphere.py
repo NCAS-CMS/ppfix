@@ -64,7 +64,7 @@ def write_field(
              dataset_chunks='4 MiB')
     t2 = time.perf_counter() - t1
 
-    print(f'Written {output_path} in {t2:.2}s')
+    print(f'Written {output_path} in {t2:.2f}s')
 
 
 
@@ -116,4 +116,4 @@ def process_atmos(input_folder, output_folder, metadata, component):
             write_field(field, simulation, extra_properties, output_folder, chunk_shape)
             #exit()  # Exit after processing the first field for testing purposes
         t2 = time.perf_counter() - t1
-        print(f'Processed {f} in {t2:.2}s')
+        print(f'Processed {f} in {t2:.2f}s')
