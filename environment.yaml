@@ -1,4 +1,4 @@
-name: umcyclepp
+name: ppfix
 channels:
   - conda-forge
 

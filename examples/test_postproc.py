@@ -8,7 +8,7 @@ import configparser
 TARGET = '/Volumes/Lawrence4TB/u-dz876/'
 METADATADIR = Path(__file__).parent.parent / 'experiment_configs'
 METADATA = METADATADIR / 'n1280o12.conf'
-RUNID = 'udz876'
+
 
 AOUT = '/Volumes/Lawrence4TB/u-dz876/'+'atmos'
 OOUT = '/Volumes/Lawrence4TB/u-dz876/'+'nemo'
