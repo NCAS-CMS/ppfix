@@ -3,7 +3,6 @@ from pathlib import Path
 
 
 from ppfix.rechunk_file import rechunk_existing_netcdf
-from ppfix.chunking import get_nemochunking
 
 
 
@@ -56,9 +55,6 @@ def process_sice(
         REPLACE (bool): If True, replace existing files in target folder. If False, skip existing files.
     """
 
-    O12CHUNKS = (1660,601) #o12 grid is 4322x3606, so this results in 3x6 chunks, which is acceptable.
-    
-    
     input_folder = Path(sice_folder)
     output_folder = Path(target_folder)
     output_folder.mkdir(parents=True, exist_ok=True)
@@ -71,6 +67,6 @@ def process_sice(
         if target_file.exists() and not REPLACE:
             print(f'Skipping {f}, target file {target_file} already exists and REPLACE is False.')
             continue
-        rechunk_existing_netcdf(f, target_file, metadata, 'model_sice', 
+        rechunk_existing_netcdf(f, target_file, metadata, 'model_seaice',
                                 kwchoices={'single':True, 'dataset_chunks':'4 MiB'})
     

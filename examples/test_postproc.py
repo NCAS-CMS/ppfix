@@ -1,29 +1,39 @@
-from ppfix.inventory import inventory
+import argparse
+import configparser
 from ppfix.fix_atmosphere import process_atmos
 from ppfix.process_nemo import process_ocean
 from ppfix.process_nemo import process_sice
 from pathlib import Path
-import configparser
-
-TARGET = '/Volumes/Lawrence4TB/u-dz876/'
-METADATADIR = Path(__file__).parent.parent / 'experiment_configs'
-METADATA = METADATADIR / 'n1280o12.conf'
 
 
-AOUT = '/Volumes/Lawrence4TB/u-dz876/'+'atmos'
-OOUT = '/Volumes/Lawrence4TB/u-dz876/'+'nemo'
-SIOUT = '/Volumes/Lawrence4TB/u-dz876/'+'sice'
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description='Post-process coupled UM, NEMO, and SI3 model output.'
+    )
+    parser.add_argument('input_directory', type=Path)
+    parser.add_argument('output_directory', type=Path)
+    parser.add_argument('metadata_file', type=Path)
+    parser.add_argument(
+        '--replace', action='store_true', help='Replace existing ocean and sea-ice output files.'
+    )
+    return parser.parse_args()
 
-if not Path.exists(METADATA):
-    raise FileNotFoundError(f'Metadata file {METADATA} does not exist.')
 
-metadata = configparser.ConfigParser(interpolation=None)
-metadata.read(METADATA)
+def main():
+    args = parse_args()
+    if not args.metadata_file.is_file():
+        raise FileNotFoundError(f'Metadata file {args.metadata_file} does not exist.')
 
-#inventory('hrcm_n1280o12_control', TARGET, inv_file=Path(__file__).parent / 'inventory_test.txt')
-process_atmos(TARGET, AOUT, metadata, 'model_atmos')
-process_ocean(TARGET, OOUT, metadata, 'model_ocean')
-process_sice(TARGET, SIOUT, metadata, 'model_seaice')
+    metadata = configparser.ConfigParser(interpolation=None)
+    metadata.read(args.metadata_file)
+
+    process_atmos(args.input_directory, args.output_directory / 'atmos', metadata, 'model_atmos')
+    process_ocean(args.input_directory, args.output_directory / 'nemo', metadata, args.replace)
+    process_sice(args.input_directory, args.output_directory / 'sice', metadata, args.replace)
+
+
+if __name__ == '__main__':
+    main()
 
 
 

@@ -21,7 +21,7 @@ def rechunk_existing_netcdf(filename, outfilename, metadata, section, kwchoices)
     - None
     """
 
-    if section in ['model_ocean', 'model_sice']:
+    if section in ['model_ocean', 'model_seaice']:
         chunk_algorithm = get_nemochunking
     else:
         raise ValueError(f"Unsupported section '{section}' for rechunking.")
@@ -34,6 +34,7 @@ def rechunk_existing_netcdf(filename, outfilename, metadata, section, kwchoices)
     tracking_id = str(uuid4())
     ta = time.perf_counter()
     for v in fields:
+        meta2attr(metadata, v, section)
         chunks = chunk_algorithm(v)
         if chunks is not None:
             v.nc_set_dataset_chunksizes(tuple(chunks))
