@@ -53,10 +53,16 @@ def get_nemochunking(field: cf.Field) -> tuple[int, ...]:
         #O12
         (1, 75, 3606, 4322): (1, 1, 601, 1441),
         (28, 3606, 4322): (1, 601, 1441),
+        (29, 3606, 4322): (1, 601, 1441),
+        (30, 3606, 4322): (1, 601, 1441),
+        (31, 3606, 4322): (1, 601, 1441),
         (1, 3606, 4322): (1, 601, 1441),
         (1, 1, 3606, 4322): (1, 1, 601, 1441),
         (1, 5, 3606, 4322): (1, 1, 601, 1441),
         (28, 1, 3606, 4322): (1, 1, 601, 1441),
+        (29, 1, 3606, 4322): (1, 1, 601, 1441),
+        (30, 1, 3606, 4322): (1, 1, 601, 1441),
+        (31, 1, 3606, 4322): (1, 1, 601, 1441),
         (1, 5, 3606, 1): (1, 5, 3606, 1),
         (1, 5, 75, 3606, 1): (1, 5, 1, 3606, 1),
         (1,): None,
@@ -70,5 +76,4 @@ def get_nemochunking(field: cf.Field) -> tuple[int, ...]:
         return newchunk
     else:
         print(f"Field {field.identity()} with shape {shape} not recognised NEMO chunking")
-        raise ValueError(f"Field {field.identity()} with shape {shape} not recognised NEMO chunking")
         return None

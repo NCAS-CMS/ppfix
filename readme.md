@@ -11,11 +11,7 @@ python -m pip install .
 
 (`conda` can be used in place of `mamba`.)
 
-Copy and edit `experiment_configs/n1280o12.conf` for the experiment being processed. Then copy
-`examples/test_postproc.py` to your own project, or run it directly:
+Copy and edit `experiment_configs/n1280o12.conf` for the experiment being processed. Then copy (and rename) `examples/test_postproc.py` to your own project and edit it for your data layout.
 
-```console
-python examples/test_postproc.py INPUT_DIRECTORY OUTPUT_DIRECTORY METADATA_FILE
-```
+The example shows separate `atmos`, `nemo`, and `sice` directories, but these can be the same. Note that there is an option to replace processed files or only process those which have not yet been procesed.
 
-The output directory receives separate `atmos`, `nemo`, and `sice` directories. Existing ocean and sea-ice files are skipped by default; pass `--replace` to overwrite them.
