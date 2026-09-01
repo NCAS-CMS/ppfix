@@ -13,9 +13,6 @@ def parse_args():
     parser.add_argument('input_directory', type=Path)
     parser.add_argument('output_directory', type=Path)
     parser.add_argument('metadata_file', type=Path)
-    parser.add_argument(
-        '--replace', action='store_true', help='Replace existing ocean and sea-ice output files.'
-    )
     return parser.parse_args()
 
 
@@ -28,8 +25,8 @@ def main():
     metadata.read(args.metadata_file)
 
     process_atmos(args.input_directory, args.output_directory / 'atmos', metadata, 'model_atmos')
-    process_ocean(args.input_directory, args.output_directory / 'nemo', metadata, args.replace)
-    process_sice(args.input_directory, args.output_directory / 'sice', metadata, args.replace)
+    process_ocean(args.input_directory, args.output_directory / 'nemo', metadata, True)
+    process_sice(args.input_directory, args.output_directory / 'sice', metadata, True)
 
 
 if __name__ == '__main__':
