@@ -17,26 +17,41 @@ def parse_args():
     return parser.parse_args()
 
 
-def iter_input_files(input_directory: Path, patterns: list[str] | None):
-    if patterns:
-        for pattern in patterns:
-            yield from input_directory.glob(pattern)
-    else:
-        yield from input_directory.glob('*')
+def resolve_input_roots(input_directory: Path) -> list[Path]:
+    if input_directory.is_dir():
+        return [input_directory]
+
+    parent = input_directory.parent
+    if not parent.is_dir():
+        raise NotADirectoryError(f'Input directory {input_directory} does not exist.')
+
+    matches = sorted(path for path in parent.glob(f'{input_directory.name}*') if path.is_dir())
+    if not matches:
+        raise NotADirectoryError(f'Input directory {input_directory} does not exist and no matching directories were found.')
+
+    return matches
+
+
+def iter_input_files(input_roots: list[Path], patterns: list[str] | None):
+    for input_root in input_roots:
+        if patterns:
+            for pattern in patterns:
+                yield from input_root.glob(pattern)
+        else:
+            yield from input_root.glob('*')
 
 
 def main():
     args = parse_args()
 
     input_directory = args.input_directory.expanduser().resolve()
-    if not input_directory.is_dir():
-        raise NotADirectoryError(f'Input directory {input_directory} does not exist.')
+    input_roots = resolve_input_roots(input_directory)
 
     output_manifest = args.output_manifest.expanduser().resolve()
     output_manifest.parent.mkdir(parents=True, exist_ok=True)
 
     files = []
-    for file_path in iter_input_files(input_directory, args.patterns):
+    for file_path in iter_input_files(input_roots, args.patterns):
         if not file_path.is_file() or file_path.name.startswith('.'):
             continue
         files.append(str(file_path.resolve()))
