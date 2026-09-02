@@ -14,6 +14,8 @@ def write_field(
     extra_properties: dict[str, object],
     output_target_dir: str,
     chunk_shape: tuple[int, ...] | None = None,
+    field_index: int = 0,
+    total_fields: int = 1,
 ) -> None:
     """
     Write a field to a NetCDF file with the specified properties.
@@ -55,7 +57,7 @@ def write_field(
         field.nc_set_dataset_chunksizes(chunk_shape)
 
     print(field)
-    print(f'Writing field [{field.identity()}] to {output_path} with chunk shape {chunk_shape}')
+    print(f'Writing field [{field.identity()}] ({field_index+1}/{total_fields}) to {output_path} with chunk shape {chunk_shape}')
     t1 = time.perf_counter()
     cf.write(field, 
              dataset_name=str(output_path), 
@@ -105,7 +107,7 @@ def process_atmos(input_folder, output_folder, metadata, component):
         cmip = CMIPIdentifiers()
 
         t1 = time.perf_counter()
-        for field in fields:
+        for i,field in enumerate(fields):
             meta2attr(metadata, field, component)
 
             extra_properties = inspect_field(cmip, field)
@@ -113,7 +115,7 @@ def process_atmos(input_folder, output_folder, metadata, component):
 
             # Determine chunk shape based on the field's shape
             chunk_shape = get_umchunking(field)
-            write_field(field, simulation, extra_properties, output_folder, chunk_shape)
+            write_field(field, simulation, extra_properties, output_folder, chunk_shape, i, len(fields))
             #exit()  # Exit after processing the first field for testing purposes
         t2 = time.perf_counter() - t1
         print(f'Processed {f} in {t2:.2f}s')
