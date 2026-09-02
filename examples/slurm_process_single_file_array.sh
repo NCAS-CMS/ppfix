@@ -14,7 +14,10 @@
 # Use one array task per input file.
 # Example submission:
 #   sbatch --array=0-$(($(wc -l < file-manifest.txt) - 1)) \
-#     examples/slurm_process_single_file_array.sh \
+#     SCRIPT_DIR MANIFEST_FILE OUTPUT_DIRECTORY METADATA_FILE
+#   Example:
+#     sbatch --array=0-$(($(wc -l < file-manifest.txt) - 1)) \
+#     "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)" \ 
 #     file-manifest.txt /path/to/output experiment_configs/n1280o12.conf
 
 set -euo pipefail
@@ -27,11 +30,12 @@ if [[ $# -lt 3 ]]; then
     exit 1
 fi
 
-MANIFEST_FILE=$1
-OUTPUT_DIRECTORY=$2
-METADATA_FILE=$3
+SCRIPT_DIR=$1
+MANIFEST_FILE=$2
+OUTPUT_DIRECTORY=$3
+METADATA_FILE=$4
 
-SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
 INPUT_FILE=$(sed -n "$((SLURM_ARRAY_TASK_ID + 1))p" "$MANIFEST_FILE")
 
 if [[ -z "$INPUT_FILE" ]]; then
