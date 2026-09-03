@@ -3,6 +3,7 @@ from pathlib import Path
 
 
 from ppfix.rechunk_file import rechunk_existing_netcdf
+from ppfix.untils import meta2output 
 
 
 
@@ -61,12 +62,14 @@ def process_sice(
 
     files = input_folder.glob('si3*.nc')
 
+    kwchoices = meta2output(metadata)
+
+ 
     for f in files:
         print('Examining: ',f)
         target_file = output_folder / f.name
         if target_file.exists() and not REPLACE:
             print(f'Skipping {f}, target file {target_file} already exists and REPLACE is False.')
             continue
-        rechunk_existing_netcdf(f, target_file, metadata, 'model_seaice',
-                                kwchoices={'single':True, 'dataset_chunks':'4 MiB'})
+        rechunk_existing_netcdf(f, target_file, metadata, 'model_seaice', kwchoices=kwchoices)
     

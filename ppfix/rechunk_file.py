@@ -1,9 +1,14 @@
 import cf
 import time
+from pathlib import Path
 from uuid import uuid4
 
 from ppfix.utils import meta2attr
 from ppfix.chunking import get_nemochunking
+
+
+def _format_gib(num_bytes: int) -> float:
+    return num_bytes / (1024 ** 3)
 
 def rechunk_existing_netcdf(filename, outfilename, metadata, section, kwchoices):
     """
@@ -44,5 +49,16 @@ def rechunk_existing_netcdf(filename, outfilename, metadata, section, kwchoices)
         
     cf.write(fields, str(outfilename), **kwchoices)
     t2 = time.perf_counter() - ta
-    print(f'Total time for chunking {filename} was {t2:.2f} seconds')
+    output_size = None
+    outpath = Path(outfilename)
+    if outpath.exists():
+        output_size = outpath.stat().st_size
+
+    if output_size is None:
+        print(f'Total time for chunking {filename} was {t2:.2f} seconds')
+    else:
+        print(
+            f'Total time for chunking {filename} was {t2:.2f} seconds; '
+            f'output size {output_size} bytes ({_format_gib(output_size):.2f} GiB)'
+        )
     

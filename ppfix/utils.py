@@ -4,6 +4,24 @@ def _clean_metadata_value(value):
         return value[1:-1]
     return value
 
+def meta2output(metadata):
+    """ 
+    Generate a dictionary of write options from the metadata.conf file.
+    """
+    write_kwargs = {}
+    if 'output' in metadata.sections():
+        print(f'Using output section from metadata for write options: {metadata["output"]}')
+        expected = ['compress', 'single', 'dataset_chunks']
+        for key, value in metadata['output'].items():
+            if key not in expected:
+                print(f'Warning: unexpected key "{key}" in output section of metadata; ignoring it.')
+        if 'compress' in metadata['output']:
+            write_kwargs['compress'] = metadata.getint('output', 'compress')
+        if 'single' in metadata['output']:
+            write_kwargs['single'] = metadata.getboolean('output', 'single')
+        if 'dataset_chunks' in metadata['output']:
+            write_kwargs['dataset_chunks'] = metadata.get('output', 'dataset_chunks')
+    return write_kwargs
 
 def meta2attr(metadata, field, component):
 
@@ -56,7 +74,7 @@ def make_output_file_name(simulation, properties):
     Returns the constructed output filename.
     """
     if properties['zonal_cell_method'] in ['Mean','mean']:
-        filename = f"{simulation}__{properties['cms_table']}zm__{properties['start_date']}__{properties['temporal_cell_method']}__{properties['zonal_cell_method']}__{properties['identity']}__{properties['cmip6_variable']}.nc"
+        filename = f"{simulation}__{properties['cms_table']}zm__{properties['start_date']}__{properties['temporal_cell_method']}__{properties['identity']}__{properties['cmip6_variable']}.nc"
     else:
         filename = f"{simulation}__{properties['cms_table']}__{properties['start_date']}__{properties['temporal_cell_method']}__{properties['identity']}__{properties['cmip6_variable']}.nc"
     filename = filename.lower()
