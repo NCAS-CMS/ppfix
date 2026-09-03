@@ -4,7 +4,7 @@ from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
-from ppfix import process_nemo, rechunk_file
+from ppfix import fix_atmosphere, process_nemo, rechunk_file
 
 
 class FakeField:
@@ -56,6 +56,45 @@ class RechunkExistingNetcdfTests(unittest.TestCase):
         self.assertEqual(field.properties['activity-id'], 'HRCM')
         self.assertEqual(field.properties['nominal_resolution'], '10 km')
         self.assertEqual(writes[0][1], 'output.nc')
+
+
+class ProcessAtmosTests(unittest.TestCase):
+    def test_forwards_custom_write_kwargs(self):
+        field = FakeField()
+        writes = []
+        fake_cf = SimpleNamespace(
+            read=lambda filename: [field],
+            write=lambda field_obj, dataset_name, **kwargs: writes.append((dataset_name, kwargs)),
+        )
+
+        with patch.object(fix_atmosphere, 'cf', fake_cf), patch.object(
+            fix_atmosphere, 'build_simulation_name', return_value='simulation'
+        ), patch.object(fix_atmosphere, 'CMIPIdentifiers', return_value=object()), patch.object(
+            fix_atmosphere, 'inspect_field', return_value={
+                'cms_table': 'day',
+                'temporal_cell_method': 'mean',
+                'identity': 'tas',
+                'cmip6_variable': 'tas',
+                'zonal_cell_method': None,
+                'start_date': '19500101',
+            }
+        ), patch.object(fix_atmosphere, 'get_umchunking', return_value=None), patch.object(
+            fix_atmosphere, 'meta2attr'
+        ), patch('pathlib.Path.glob', return_value=[Path('atm.pp')]), patch('pathlib.Path.is_file', return_value=True), patch(
+            'pathlib.Path.mkdir'
+        ):
+            fix_atmosphere.process_atmos(
+                'input',
+                'output',
+                metadata(),
+                'model_atmos',
+                write_kwargs={'compress': 0, 'dataset_chunks': '8 MiB'},
+            )
+
+        self.assertEqual(writes[0][1]['fmt'], 'NETCDF4')
+        self.assertEqual(writes[0][1]['single'], True)
+        self.assertEqual(writes[0][1]['dataset_chunks'], '8 MiB')
+        self.assertEqual(writes[0][1]['compress'], 0)
 
 
 class ProcessSeaIceTests(unittest.TestCase):
