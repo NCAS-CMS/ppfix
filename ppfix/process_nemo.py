@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 from ppfix.rechunk_file import rechunk_existing_netcdf
-from ppfix.untils import meta2output 
+from ppfix.utils import meta2output 
 
 
 
