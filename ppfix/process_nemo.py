@@ -30,6 +30,8 @@ def process_ocean(
 
     files = input_folder.glob('nemo*.nc')
 
+    kwchoices = meta2output(metadata)
+
     for f in files:
         print('Examining: ',f)
         target_file = output_folder / f.name
@@ -37,7 +39,7 @@ def process_ocean(
             print(f'Skipping {f}, target file {target_file} already exists and REPLACE is False.')
             continue
         rechunk_existing_netcdf(f, target_file, metadata, 'model_ocean', 
-                                kwchoices={'single':True, 'dataset_chunks':'4 MiB'})
+                                kwchoices=kwchoices)
 
     
 def process_sice(
