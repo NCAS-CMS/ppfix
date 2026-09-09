@@ -31,7 +31,25 @@ def inspect_field(cmip, fld, logfile=None):
         identity =  re.sub(r'[^0-9A-Za-z]+', '_', identity).strip('_')
 
     if v in [None, 'unknown', 'expression']:
-        v = ''
+        zc = fld.dimension_coordinate('Z', default=None)
+        if zc is not None:
+            zc_name = zc.get_property('standard_name', None)
+            if zc_name is not None:
+                if 'pressure' in zc_name:
+                    zc_name = 'P'
+                elif 'height' in zc_name:
+                    zc_name = 'H'
+                else:
+                    zc_name = 'Z'
+            else:
+                zc_name='Z'
+            size = zc.shape[0] if zc.shape is not None else 0
+            v = f'{zc_name}{size}'
+    
+        else:
+            if fld.shape is not None and len(fld.shape) > 3:
+                print(fld)
+            v = ''
 
     new_properties = {
         'cmip6_table': t,
@@ -156,4 +174,4 @@ if __name__ == '__main__':
         sys.exit(1)
     print(f'Creating inventory for {target_dir} with cf version {cf.__version__}')
     experiment = 'n1280o12_control'
-    inventory(experiment, target_dir)
+    inventory(experiment, target_dir, inv_file=Path(target_dir) / 'inventory.txt')
