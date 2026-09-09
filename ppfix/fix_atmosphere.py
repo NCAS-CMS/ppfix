@@ -44,6 +44,7 @@ def write_field(
     chunk_shape: tuple[int, ...] | None = None,
     field_index: int = 0,
     total_fields: int = 1,
+    globals: list[str] | None = None,
     write_kwargs: dict[str, Any] | None = None,
     report_timings: bool = False,
 ) -> None:
@@ -101,7 +102,7 @@ def write_field(
     effective_write_kwargs = dict(DEFAULT_WRITE_KWARGS)
     if write_kwargs is not None:
         effective_write_kwargs.update(write_kwargs)
-    cf.write(field, dataset_name=str(output_path), **effective_write_kwargs)
+    cf.write(field, dataset_name=str(output_path), globals=globals, **effective_write_kwargs)
     t2 = time.perf_counter() - t1
 
     output_size = None
@@ -177,11 +178,12 @@ def process_atmos(
         t1 = time.perf_counter()
         for i, field in enumerate(fields):
             field_started = time.perf_counter()
-            meta2attr(metadata, field, component)
+            globals = meta2attr(metadata, field, component)
 
             prep_started = time.perf_counter()
             extra_properties = inspect_field(cmip, field)
             extra_properties['tracking_id'] = str(uuid4())
+            globals.append('tracking_id')
 
             # Determine chunk shape based on the field's shape
             chunk_shape = get_umchunking(field)
@@ -194,6 +196,7 @@ def process_atmos(
                 chunk_shape,
                 i,
                 len(fields),
+                globals,
                 write_kwargs=write_kwargs,
                 report_timings=report_timings,
             )

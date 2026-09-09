@@ -39,15 +39,16 @@ def rechunk_existing_netcdf(filename, outfilename, metadata, section, kwchoices)
     tracking_id = str(uuid4())
     ta = time.perf_counter()
     for v in fields:
-        meta2attr(metadata, v, section)
+        globals=meta2attr(metadata, v, section)
         chunks = chunk_algorithm(v)
         if chunks is not None:
             v.nc_set_dataset_chunksizes(tuple(chunks))
             v.data.rechunk(tuple(chunks), inplace=True)
         if not hasattr(v, 'tracking_id'):
             v.set_property('tracking_id', tracking_id)
+    globals.append('tracking_id')
         
-    cf.write(fields, str(outfilename), **kwchoices)
+    cf.write(fields, str(outfilename), globals=globals, **kwchoices)
     t2 = time.perf_counter() - ta
     output_size = None
     outpath = Path(outfilename)
