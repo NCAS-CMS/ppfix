@@ -48,7 +48,7 @@ def rechunk_existing_netcdf(filename, outfilename, metadata, section, kwchoices)
             v.set_property('tracking_id', tracking_id)
     globals.append('tracking_id')
         
-    cf.write(fields, str(outfilename), globals=globals, **kwchoices)
+    cf.write(fields, str(outfilename), global_attributes=globals, **kwchoices)
     t2 = time.perf_counter() - ta
     output_size = None
     outpath = Path(outfilename)

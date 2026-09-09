@@ -102,7 +102,7 @@ def write_field(
     effective_write_kwargs = dict(DEFAULT_WRITE_KWARGS)
     if write_kwargs is not None:
         effective_write_kwargs.update(write_kwargs)
-    cf.write(field, dataset_name=str(output_path), globals=globals, **effective_write_kwargs)
+    cf.write(field, dataset_name=str(output_path), global_attributes=globals, **effective_write_kwargs)
     t2 = time.perf_counter() - t1
 
     output_size = None
