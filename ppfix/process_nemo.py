@@ -7,7 +7,7 @@ from ppfix.utils import meta2output, build_simulation_name
 
 def new_name(filename: str, origin, simulation: str) -> str:
     parts = filename.split('_')
-    return f"{simulation}_{origin}_{'_'.join(parts[2:])}"
+    return f"{simulation.lower()}_{origin}_{'_'.join(parts[2:])}"
 
 
 def process_ocean(
