@@ -3,6 +3,7 @@ from ppfix.utils import meta2attr, build_simulation_name, make_output_file_name,
 from ppfix.inventory import inspect_field
 from pathlib import Path
 from typing import Any
+import re
 from uuid import uuid4
 from tables.cmip_identifiers import CMIPIdentifiers
 from ppfix.chunking import get_umchunking
@@ -18,6 +19,55 @@ DEFAULT_WRITE_KWARGS = {
 
 def _format_gib(num_bytes: int) -> float:
     return num_bytes / (1024 ** 3)
+
+
+def canonicalise(field: cf.Field) -> None:
+    """
+    Canonicalise the field by handling trailing dimension suffixes produced by umfive 
+    for multiple variables in a single file.
+    """
+
+    def _strip_numeric_suffix(name: str | None) -> str | None:
+        if not name:
+            return name
+        return re.sub(r'_(\d+)$', '', name)
+
+    def _rename_nc_variable(construct: Any, rename_map: dict[str, str]) -> None:
+        old_name = construct.nc_get_variable(None)
+        if not old_name :
+            return
+        new_name = rename_map.get(old_name, _strip_numeric_suffix(old_name))
+        if new_name and new_name != old_name:
+            construct.nc_set_variable(new_name)
+
+    def _rename_nc_dimension(axis: Any) -> None:
+        old_name = axis.nc_get_dimension(None)
+        if not old_name:
+            return
+        new_name = _strip_numeric_suffix(old_name)
+        if new_name and new_name != old_name:
+            axis.nc_set_dimension(new_name)
+
+    # Coordinate variable names often carry numeric suffixes (e.g. latitude_1),
+    # and associated bounds are typically derived from those names.
+    rename_map: dict[str, str] = {}
+    for construct in field.coordinates(todict=True).values():
+        old_name = construct.nc_get_variable(None)
+        new_name = _strip_numeric_suffix(old_name)
+        if old_name and new_name and new_name != old_name:
+            rename_map[old_name] = new_name
+
+    for old_name, new_name in list(rename_map.items()):
+        rename_map[f'{old_name}_bounds'] = f'{new_name}_bounds'
+
+    for construct in field.coordinates(todict=True).values():
+        _rename_nc_variable(construct, rename_map)
+        bounds = construct.get_bounds(None)
+        if bounds is not None:
+            _rename_nc_variable(bounds, rename_map)
+
+    for axis in field.domain_axes(todict=True).values():
+        _rename_nc_dimension(axis)
 
 
 def _estimate_field_payload_gib(field: cf.Field) -> float | None:
@@ -92,6 +142,10 @@ def write_field(
         payload_summary = 'unknown raw payload'
     else:
         payload_summary = f'~{payload_gib:.2f} GiB raw payload'
+
+    # need to handle the trailing dimension suffixes produced by umfive 
+    # for multiple fields in a single file, e.g. _1, _2, etc.
+    canonicalise(field)
 
     print(field)
     print(
