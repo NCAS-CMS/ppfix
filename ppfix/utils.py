@@ -88,7 +88,7 @@ def build_simulation_name(metadata):
     """ 
     Create simulation name from metadata.conf information
     """
-    project = metadata['General'].get('activity-id', 'unknown')
+    project = metadata['General'].get('activity_id', 'unknown')
     experiment = metadata['General'].get('experiment', 'unknown')
     runid = metadata['run_specific'].get('runid', 'unknown')
     return f'{project}_{experiment}_{runid}'
@@ -99,7 +99,7 @@ def make_output_file_name(simulation, properties):
     """
 
     variable = properties['cmip6_variable']
-    if variable is 'unknown':
+    if variable == 'unknown':
         variable = ''
 
     if properties['zonal_cell_method'] in ['Mean','mean']:
