@@ -137,7 +137,7 @@ def write_field(
     # will respect the specificied chunk_shape if provided.
 
     for k, v in extra_properties.items():
-        if v is not None:
+        if v is not None and v !='unknown':
             field.set_property(k, v)
 
     if chunk_shape is not None:
@@ -244,6 +244,13 @@ def process_atmos(
             extra_properties = inspect_field(cmip, field)
             extra_properties['tracking_id'] = str(uuid4())
             globals.append('tracking_id')
+
+            # deal with squeezing the 'Z' dimension if it exists
+            try:
+                field.squeeze('Z', inplace=True)
+            except Exception as e:
+                pass
+
 
             # Determine chunk shape based on the field's shape
             chunk_shape = get_umchunking(field)

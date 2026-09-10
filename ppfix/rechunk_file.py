@@ -44,7 +44,9 @@ def rechunk_existing_netcdf(filename, outfilename, metadata, section, kwchoices)
         if chunks is not None:
             v.nc_set_dataset_chunksizes(tuple(chunks))
             v.data.rechunk(tuple(chunks), inplace=True)
-        if not hasattr(v, 'tracking_id'):
+        if hasattr(v,'uuid'):
+            v.set_property('tracking_id', v.get_property('uuid'))
+        elif not hasattr(v, 'tracking_id'):
             v.set_property('tracking_id', tracking_id)
     globals.append('tracking_id')
         

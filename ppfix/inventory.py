@@ -30,26 +30,23 @@ def inspect_field(cmip, fld, logfile=None):
     else:
         identity =  re.sub(r'[^0-9A-Za-z]+', '_', identity).strip('_')
 
-    if v in [None, 'unknown', 'expression']:
-        zc = fld.dimension_coordinate('Z', default=None)
-        if zc is not None:
-            zc_name = zc.get_property('standard_name', None)
-            if zc_name is not None:
-                if 'pressure' in zc_name:
-                    zc_name = 'P'
-                elif 'height' in zc_name:
-                    zc_name = 'H'
-                else:
-                    zc_name = 'Z'
+   
+    zc = fld.dimension_coordinate('Z', default=None)
+    if zc is not None:
+        zc_name = zc.get_property('standard_name', None)
+        if zc_name is not None:
+            if 'pressure' in zc_name:
+                zc_name = 'P'
+            elif 'height' in zc_name:
+                zc_name = 'H'
             else:
-                zc_name='Z'
-            size = zc.shape[0] if zc.shape is not None else 0
-            v = f'{zc_name}{size}'
-    
+                zc_name = 'Z'
         else:
-            if fld.shape is not None and len(fld.shape) > 3:
-                print(fld)
-            v = ''
+            zc_name='Z'
+        size = zc.shape[0] if zc.shape is not None else 0
+        vci = f'{zc_name}{size}'
+    else:
+        vci = 'Z0'
 
     new_properties = {
         'cmip6_table': t,
@@ -58,7 +55,8 @@ def inspect_field(cmip, fld, logfile=None):
         'temporal_cell_method': tcm,
         'zonal_cell_method': xcm,
         'identity': identity,
-        'start_date': start_date, 
+        'start_date': start_date,
+        'cms_vcoord': vci,
     }
 
     if logfile is not None:
