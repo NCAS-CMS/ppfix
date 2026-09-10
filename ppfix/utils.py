@@ -98,9 +98,13 @@ def make_output_file_name(simulation, properties):
     Returns the constructed output filename.
     """
 
+    variable = properties['cmip6_variable']
+    if variable is 'unknown':
+        variable = ''
+
     if properties['zonal_cell_method'] in ['Mean','mean']:
-        filename = f"{simulation}__{properties['cms_table']}zm__{properties['start_date']}__{properties['temporal_cell_method']}__{properties['identity']}__{properties['cms_vcoord']}__{properties['cmip6_variable']}.nc"
+        filename = f"{simulation}__{properties['cms_table']}zm__{properties['start_date']}__{properties['temporal_cell_method']}__{properties['identity']}__{properties['cms_vcoord']}__{variable}.nc"
     else:
-        filename = f"{simulation}__{properties['cms_table']}__{properties['start_date']}__{properties['temporal_cell_method']}__{properties['identity']}__{properties['cms_vcoord']}__{properties['cmip6_variable']}.nc"
+        filename = f"{simulation}__{properties['cms_table']}__{properties['start_date']}__{properties['temporal_cell_method']}__{properties['identity']}__{properties['cms_vcoord']}__{variable}.nc"
     filename = filename.lower()
     return filename
