@@ -3,8 +3,11 @@ from pathlib import Path
 
 
 from ppfix.rechunk_file import rechunk_existing_netcdf
-from ppfix.utils import meta2output 
+from ppfix.utils import meta2output, build_simulation_name
 
+def new_name(filename: str, simulation: str) -> str:
+    parts = filename.split('_')
+    return f"{simulation}_{'_'.join(parts[2:])}"
 
 
 def process_ocean(
@@ -32,9 +35,10 @@ def process_ocean(
 
     kwchoices = meta2output(metadata)
 
+    simulation = build_simulation_name(metadata)
     for f in files:
         print('Examining: ',f)
-        target_file = output_folder / f.name
+        target_file = output_folder / new_name(f.name, simulation)
         if target_file.exists() and not REPLACE:
             print(f'Skipping {f}, target file {target_file} already exists and REPLACE is False.')
             continue
@@ -66,10 +70,10 @@ def process_sice(
 
     kwchoices = meta2output(metadata)
 
- 
+    simulation = build_simulation_name(metadata)
     for f in files:
         print('Examining: ',f)
-        target_file = output_folder / f.name
+        target_file = output_folder / new_name(f.name, simulation)
         if target_file.exists() and not REPLACE:
             print(f'Skipping {f}, target file {target_file} already exists and REPLACE is False.')
             continue

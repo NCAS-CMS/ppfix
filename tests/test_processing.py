@@ -201,3 +201,16 @@ def test_uses_model_seaice_section_and_does_not_replace_by_default(target_exists
         return
 
     rechunk.assert_not_called()
+
+
+def test_process_sice_rewrites_output_filename_from_simulation_and_suffix():
+    source_file = Path('nemo_dz876o_1m_19501101-19501201_grid-X.nc')
+
+    with patch.object(process_nemo, 'rechunk_existing_netcdf') as rechunk, patch.object(
+        process_nemo, 'build_simulation_name', return_value='fred'
+    ), patch('pathlib.Path.glob', return_value=[source_file]), patch(
+        'pathlib.Path.mkdir'
+    ), patch('pathlib.Path.exists', return_value=False):
+        process_nemo.process_sice('input', 'output', metadata())
+
+    assert rechunk.call_args.args[1] == Path('output/fred_1m_19501101-19501201_grid-X.nc')
