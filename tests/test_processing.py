@@ -46,9 +46,10 @@ class FakeCoordinate:
 
 
 class FakeCanonicalField:
-    def __init__(self, coordinates, axes):
+    def __init__(self, coordinates, axes, variable_name=None):
         self._coordinates = coordinates
         self._axes = axes
+        self._variable_name = variable_name
 
     def coordinates(self, todict=False):
         if todict:
@@ -59,6 +60,12 @@ class FakeCanonicalField:
         if todict:
             return self._axes
         return tuple(self._axes.values())
+
+    def nc_get_variable(self, default=None):
+        return self._variable_name if self._variable_name is not None else default
+
+    def nc_set_variable(self, variable_name):
+        self._variable_name = variable_name
 
 
 def metadata():
@@ -158,7 +165,7 @@ def test_strips_numeric_suffixes_from_coordinate_vars_and_dimensions():
         'axis2': FakeAxis('longitude_1'),
         'axis3': FakeAxis('time'),
     }
-    field = FakeCanonicalField(coords, axes)
+    field = FakeCanonicalField(coords, axes, variable_name='tas_3')
 
     fix_atmosphere.canonicalise(field)
 
@@ -172,6 +179,7 @@ def test_strips_numeric_suffixes_from_coordinate_vars_and_dimensions():
     assert axes['axis1'].nc_get_dimension() == 'latitude'
     assert axes['axis2'].nc_get_dimension() == 'longitude'
     assert axes['axis3'].nc_get_dimension() == 'time'
+    assert field.nc_get_variable() == 'tas'
 
 
 @pytest.mark.parametrize(

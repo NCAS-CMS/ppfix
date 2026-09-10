@@ -32,11 +32,14 @@ def canonicalise(field: cf.Field) -> None:
             return name
         return re.sub(r'_(\d+)$', '', name)
 
-    def _rename_nc_variable(construct: Any, rename_map: dict[str, str]) -> None:
+    def _rename_nc_variable(construct: Any, rename_map: dict[str, str] | None = None) -> None:
         old_name = construct.nc_get_variable(None)
         if not old_name :
             return
-        new_name = rename_map.get(old_name, _strip_numeric_suffix(old_name))
+        if rename_map is None:
+            new_name = _strip_numeric_suffix(old_name)
+        else:
+            new_name = rename_map.get(old_name, _strip_numeric_suffix(old_name))
         if new_name and new_name != old_name:
             construct.nc_set_variable(new_name)
 
@@ -68,6 +71,9 @@ def canonicalise(field: cf.Field) -> None:
 
     for axis in field.domain_axes(todict=True).values():
         _rename_nc_dimension(axis)
+
+    # Finally, strip any trailing numeric suffix on the data variable itself.
+    _rename_nc_variable(field)
 
 
 def _estimate_field_payload_gib(field: cf.Field) -> float | None:
