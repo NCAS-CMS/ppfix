@@ -1,8 +1,25 @@
+import ast
+
+
 def _clean_metadata_value(value):
     value = value.strip()
     if len(value) >= 2 and value[0] == value[-1] and value[0] in ("'", '"'):
         return value[1:-1]
     return value
+
+
+def _metadata_mapping(section, option):
+    raw_value = section.get(option)
+    if raw_value is None:
+        return {}
+
+    raw_value = _clean_metadata_value(raw_value)
+    try:
+        parsed = ast.literal_eval(raw_value)
+    except (SyntaxError, ValueError):
+        return {}
+
+    return parsed if isinstance(parsed, dict) else {}
 
 def meta2output(metadata):
     """ 
@@ -56,10 +73,10 @@ def meta2attr(metadata, field, component):
             field.set_property(key, _clean_metadata_value(value))
             globals.append(key)
 
-    if 'run_specific.variant_id' in metadata:
+    if 'simulations' in metadata and 'ensemble' in metadata['simulations']:
         runid = field.get_property('runid', None)
         if runid is not None:
-            variant_map = metadata['run_specific.variant_id']
+            variant_map = _metadata_mapping(metadata['simulations'], 'ensemble')
             if runid in variant_map:
                 field.set_property('variant_id', variant_map[runid])
         globals.append('variant_id')

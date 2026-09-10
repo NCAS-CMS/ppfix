@@ -1,9 +1,9 @@
 import configparser
 from pathlib import Path
-import unittest
 from unittest.mock import patch
 
 import cf
+import pytest
 
 from ppfix import fix_atmosphere, process_nemo, rechunk_file
 
@@ -65,10 +65,12 @@ def metadata():
     parser = configparser.ConfigParser(interpolation=None)
     parser.read_string(
         '[General]\nactivity-id = HRCM\n'
+        '[simulations]\nensemble = {\'u-dz876\': \'r1i1f1p1\'}\n'
         '[run_specific]\nrunid = u-dz876\n'
         '[model_general]\ngrid_label = gn\n'
         '[model_ocean]\nnominal_resolution = 10 km\n'
         '[model_seaice]\nnominal_resolution = 10 km\n'
+        '[model_atmos]\nnominal_resolution = 10 km\n'
         '[output]\ncompress = 0\n'
         'single = true\n'
         'dataset_chunks = 8 MiB\n'
@@ -76,115 +78,118 @@ def metadata():
     return parser
 
 
-class RechunkExistingNetcdfTests(unittest.TestCase):
-    def test_applies_metadata_before_writing_sea_ice_fields(self):
-        field = cf.example_field(1)
-        writes = []
+def test_applies_metadata_before_writing_sea_ice_fields():
+    field = cf.example_field(1)
+    writes = []
 
-        with patch.object(rechunk_file.cf, 'read', return_value=[field]), patch.object(
-            rechunk_file.cf, 'write', side_effect=lambda fields, filename, **kwargs: writes.append((fields, filename, kwargs))
-        ), patch.object(
-            rechunk_file, 'get_nemochunking', return_value=None
-        ):
-            rechunk_file.rechunk_existing_netcdf(
-                'input.nc', 'output.nc', metadata(), 'model_seaice', {'single': True}
-            )
+    with patch.object(rechunk_file.cf, 'read', return_value=[field]), patch.object(
+        rechunk_file.cf, 'write', side_effect=lambda fields, filename, **kwargs: writes.append((fields, filename, kwargs))
+    ), patch.object(
+        rechunk_file, 'get_nemochunking', return_value=None
+    ):
+        rechunk_file.rechunk_existing_netcdf(
+            'input.nc', 'output.nc', metadata(), 'model_seaice', {'single': True}
+        )
 
-        self.assertEqual(field.get_property('activity-id'), 'HRCM')
-        self.assertEqual(field.get_property('nominal_resolution'), '10 km')
-        self.assertEqual(writes[0][1], 'output.nc')
+    assert field.get_property('activity-id') == 'HRCM'
+    assert field.get_property('nominal_resolution') == '10 km'
+    assert field.get_property('variant_id') == 'r1i1f1p1'
+    assert writes[0][1] == 'output.nc'
 
 
-class ProcessAtmosTests(unittest.TestCase):
-    def test_forwards_custom_write_kwargs(self):
-        field = cf.example_field(1)
+def test_assigns_variant_id_from_simulations_ensemble_mapping():
+    field = cf.example_field(1)
 
-        with patch.object(fix_atmosphere.cf, 'read', return_value=[field]), patch.object(
-            fix_atmosphere, 'write_field'
-        ) as write_field, patch.object(
-            fix_atmosphere, 'build_simulation_name', return_value='simulation'
-        ), patch.object(fix_atmosphere, 'CMIPIdentifiers', return_value=object()), patch.object(
-            fix_atmosphere, 'inspect_field', return_value={
-                'cms_table': 'day',
-                'temporal_cell_method': 'mean',
-                'identity': 'tas',
-                'cmip6_variable': 'tas',
-                'zonal_cell_method': None,
-                'start_date': '19500101',
-            }
-        ), patch.object(fix_atmosphere, 'get_umchunking', return_value=None), patch.object(
-            fix_atmosphere, 'meta2attr', return_value=['activity-id', 'runid', 'grid_label']
-        ), patch('pathlib.Path.glob', return_value=[Path('atm.pp')]), patch('pathlib.Path.is_file', return_value=True), patch(
+    globals = fix_atmosphere.meta2attr(metadata(), field, 'model_atmos')
+
+    assert field.get_property('variant_id') == 'r1i1f1p1'
+    assert 'variant_id' in globals
+
+
+def test_forwards_custom_write_kwargs():
+    field = cf.example_field(1)
+
+    with patch.object(fix_atmosphere.cf, 'read', return_value=[field]), patch.object(
+        fix_atmosphere, 'write_field'
+    ) as write_field, patch.object(
+        fix_atmosphere, 'build_simulation_name', return_value='simulation'
+    ), patch.object(fix_atmosphere, 'CMIPIdentifiers', return_value=object()), patch.object(
+        fix_atmosphere, 'inspect_field', return_value={
+            'cms_table': 'day',
+            'temporal_cell_method': 'mean',
+            'identity': 'tas',
+            'cmip6_variable': 'tas',
+            'zonal_cell_method': None,
+            'start_date': '19500101',
+        }
+    ), patch.object(fix_atmosphere, 'get_umchunking', return_value=None), patch.object(
+        fix_atmosphere, 'meta2attr', return_value=['activity-id', 'runid', 'grid_label']
+    ), patch('pathlib.Path.glob', return_value=[Path('atm.pp')]), patch('pathlib.Path.is_file', return_value=True), patch(
+        'pathlib.Path.mkdir'
+    ):
+        fix_atmosphere.process_atmos(
+            'input',
+            'output',
+            metadata(),
+            'model_atmos',
+        )
+
+    assert write_field.call_args.kwargs['write_kwargs'] == {
+        'compress': 0,
+        'single': True,
+        'dataset_chunks': '8 MiB',
+    }
+    assert write_field.call_args.args[0] is field
+    assert write_field.call_args.args[3] == Path('output')
+
+
+def test_strips_numeric_suffixes_from_coordinate_vars_and_dimensions():
+    lat_bounds = FakeBounds('latitude_1_bounds')
+    lon_bounds = FakeBounds('longitude_1_bounds')
+    coords = {
+        'dim0': FakeCoordinate('height_2'),
+        'dim1': FakeCoordinate('latitude_1', bounds=lat_bounds),
+        'dim2': FakeCoordinate('longitude_1', bounds=lon_bounds),
+        'dim3': FakeCoordinate('time'),
+    }
+    axes = {
+        'axis0': FakeAxis('height_2'),
+        'axis1': FakeAxis('latitude_1'),
+        'axis2': FakeAxis('longitude_1'),
+        'axis3': FakeAxis('time'),
+    }
+    field = FakeCanonicalField(coords, axes)
+
+    fix_atmosphere.canonicalise(field)
+
+    assert coords['dim0'].nc_get_variable() == 'height'
+    assert coords['dim1'].nc_get_variable() == 'latitude'
+    assert coords['dim2'].nc_get_variable() == 'longitude'
+    assert coords['dim3'].nc_get_variable() == 'time'
+    assert lat_bounds.nc_get_variable() == 'latitude_bounds'
+    assert lon_bounds.nc_get_variable() == 'longitude_bounds'
+    assert axes['axis0'].nc_get_dimension() == 'height'
+    assert axes['axis1'].nc_get_dimension() == 'latitude'
+    assert axes['axis2'].nc_get_dimension() == 'longitude'
+    assert axes['axis3'].nc_get_dimension() == 'time'
+
+
+@pytest.mark.parametrize(
+    ('target_exists', 'should_call_rechunk'),
+    [
+        (False, True),
+        (True, False),
+    ],
+)
+def test_uses_model_seaice_section_and_does_not_replace_by_default(target_exists, should_call_rechunk):
+    with patch.object(process_nemo, 'rechunk_existing_netcdf') as rechunk:
+        with patch('pathlib.Path.glob', return_value=[Path('si3_0001.nc')]), patch(
             'pathlib.Path.mkdir'
-        ):
-            fix_atmosphere.process_atmos(
-                'input',
-                'output',
-                metadata(),
-                'model_atmos',
-            )
+        ), patch('pathlib.Path.exists', return_value=target_exists):
+            process_nemo.process_sice('input', 'output', metadata())
 
-        self.assertEqual(write_field.call_args.kwargs['write_kwargs'], {
-            'compress': 0,
-            'single': True,
-            'dataset_chunks': '8 MiB',
-        })
-        self.assertIs(write_field.call_args.args[0], field)
-        self.assertEqual(write_field.call_args.args[3], Path('output'))
+    if should_call_rechunk:
+        assert rechunk.call_args.args[3] == 'model_seaice'
+        return
 
-
-class CanonicaliseTests(unittest.TestCase):
-    def test_strips_numeric_suffixes_from_coordinate_vars_and_dimensions(self):
-        lat_bounds = FakeBounds('latitude_1_bounds')
-        lon_bounds = FakeBounds('longitude_1_bounds')
-        coords = {
-            'dim0': FakeCoordinate('height_2'),
-            'dim1': FakeCoordinate('latitude_1', bounds=lat_bounds),
-            'dim2': FakeCoordinate('longitude_1', bounds=lon_bounds),
-            'dim3': FakeCoordinate('time'),
-        }
-        axes = {
-            'axis0': FakeAxis('height_2'),
-            'axis1': FakeAxis('latitude_1'),
-            'axis2': FakeAxis('longitude_1'),
-            'axis3': FakeAxis('time'),
-        }
-        field = FakeCanonicalField(coords, axes)
-
-        fix_atmosphere.canonicalise(field)
-
-        self.assertEqual(coords['dim0'].nc_get_variable(), 'height')
-        self.assertEqual(coords['dim1'].nc_get_variable(), 'latitude')
-        self.assertEqual(coords['dim2'].nc_get_variable(), 'longitude')
-        self.assertEqual(coords['dim3'].nc_get_variable(), 'time')
-        self.assertEqual(lat_bounds.nc_get_variable(), 'latitude_bounds')
-        self.assertEqual(lon_bounds.nc_get_variable(), 'longitude_bounds')
-        self.assertEqual(axes['axis0'].nc_get_dimension(), 'height')
-        self.assertEqual(axes['axis1'].nc_get_dimension(), 'latitude')
-        self.assertEqual(axes['axis2'].nc_get_dimension(), 'longitude')
-        self.assertEqual(axes['axis3'].nc_get_dimension(), 'time')
-
-
-class ProcessSeaIceTests(unittest.TestCase):
-    def test_uses_model_seaice_section_and_does_not_replace_by_default(self):
-        with self.subTest('new output'):
-            with unittest.mock.patch.object(process_nemo, 'rechunk_existing_netcdf') as rechunk:
-                with unittest.mock.patch('pathlib.Path.glob', return_value=[Path('si3_0001.nc')]), unittest.mock.patch(
-                    'pathlib.Path.mkdir'
-                ), unittest.mock.patch('pathlib.Path.exists', return_value=False):
-                    process_nemo.process_sice('input', 'output', metadata())
-
-            self.assertEqual(rechunk.call_args.args[3], 'model_seaice')
-
-        with self.subTest('existing output'):
-            with unittest.mock.patch.object(process_nemo, 'rechunk_existing_netcdf') as rechunk:
-                with unittest.mock.patch('pathlib.Path.glob', return_value=[Path('si3_0001.nc')]), unittest.mock.patch(
-                    'pathlib.Path.mkdir'
-                ), unittest.mock.patch('pathlib.Path.exists', return_value=True):
-                    process_nemo.process_sice('input', 'output', metadata())
-
-            rechunk.assert_not_called()
-
-
-if __name__ == '__main__':
-    unittest.main()
+    rechunk.assert_not_called()
