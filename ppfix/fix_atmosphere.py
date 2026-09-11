@@ -245,6 +245,9 @@ def process_atmos(
             extra_properties['tracking_id'] = str(uuid4())
             globals.append('tracking_id')
 
+            extra_properties['original_output'] = f.name
+            globals.append('original_output')
+
             # deal with squeezing the 'Z' dimension if it exists
             try:
                 field.squeeze('Z', inplace=True)
