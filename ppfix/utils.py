@@ -99,7 +99,7 @@ def make_output_file_name(simulation, properties):
     """
 
     variable = properties['cmip6_variable']
-    if variable == 'unknown':
+    if variable in ['unknown','expression']:
         variable = ''
 
     if properties['zonal_cell_method'] in ['Mean','mean']:
