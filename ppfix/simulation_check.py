@@ -239,11 +239,23 @@ def analyse(recs, tol, min_group, expected):
         if phase is None:               # merged series: suffix may vary; use the commonest
             phase = Counter(v[2] for v in d.values()).most_common(1)[0][0]
         first, last = exp_range[skey[0]]
-        miss = [ym for ym in month_range(first, last) if ym not in d]
+        miss, renamed = [], []
+        for ym in month_range(first, last):
+            if ym in d:
+                continue
+            month_entries = by_base.get(base, {}).get(ym, [])
+            month_phases = {p for p, _size, _rel in month_entries}
+            if month_phases:
+                renamed.append(ym)
+            else:
+                miss.append(ym)
+
         if miss:
             gaps[skey] = miss
             for ym in miss:
                 items[(base, ym, phase)] = ""
+        for ym in renamed:
+            items[(base, ym, phase)] = DIFF_SUFFIX_NOTE
 
     n_expected = n_expected_bad = 0
     if expected is not None:
