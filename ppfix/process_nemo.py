@@ -34,6 +34,7 @@ def process_ocean(
     files = input_folder.glob('nemo*.nc')
 
     kwchoices = meta2output(metadata)
+    kwchoices['overwrite'] = REPLACE
 
     simulation = build_simulation_name(metadata)
     for f in files:
@@ -69,6 +70,7 @@ def process_sice(
     files = input_folder.glob('si3*.nc')
 
     kwchoices = meta2output(metadata)
+    kwchoices['overwrite'] = REPLACE
 
     simulation = build_simulation_name(metadata)
     for f in files:

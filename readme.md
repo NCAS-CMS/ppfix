@@ -6,10 +6,20 @@ Install the supported conda environment and the package from a clone of this rep
 ```console
 mamba env create -f environment.yaml
 mamba activate ppfix
-python -m pip install .
+python -m pip install -e .
 ```
 
 (`conda` can be used in place of `mamba`.)
+
+Atmospheric processing repairs hybrid-height orography using the read-only
+`assets/orographies_n1280.nc` file. Keep this asset in the clone when using the
+editable installation above. Existing orography is squeezed to remove singleton
+axes; otherwise, the matching latitude/longitude grid is inserted. Processing
+raises an error if no grid matches. Other resolutions can supply a different
+read-only file with `process_atmos(..., orography_file='/path/to/orographies.nc')`.
+The helper is also available as
+`ppfix.fixorography.fix_orography(field, orography_file=...)` and modifies the
+in-memory field, not the source file.
 
 Copy and edit `experiment_configs/n1280o12.conf` for the experiment being processed. Then copy (and rename) `examples/test_postproc.py` to your own project and edit it for directory-based runs.
 
@@ -21,3 +31,14 @@ Use `examples/generate_manifest.py` to build a text manifest of absolute input p
 For convenience, `examples/submit_process_single_file_array.sh` will build the manifest and submit the Slurm array in one step.
 If some array tasks fail, `examples/find_failed_array_tasks.py` will scan the Slurm `.err` files, write a CSV summary of failed jobs, and create a manifest containing just the failed input files.
 
+Atmospheric output safety
+-------------------------
+
+Atmospheric processing refuses to overwrite existing output files. Use a fresh
+output directory for reruns. Before writing any fields from an input, all output
+names are checked for collisions and existing targets. Colliding fields gain a
+STASH-code suffix (or a NetCDF variable-name suffix when no STASH code exists).
+Fields without a start date also gain their input filename as a suffix to avoid
+collisions between array tasks. Ambiguous names raise an error instead of
+silently dropping or replacing a field. Non-colliding dated filenames retain
+their existing format.

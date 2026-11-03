@@ -106,5 +106,8 @@ def make_output_file_name(simulation, properties):
         filename = f"{simulation}__{properties['cms_table']}zm__{properties['start_date']}__{properties['temporal_cell_method']}__{properties['identity']}__{properties['cms_vcoord']}__{variable}.nc"
     else:
         filename = f"{simulation}__{properties['cms_table']}__{properties['start_date']}__{properties['temporal_cell_method']}__{properties['identity']}__{properties['cms_vcoord']}__{variable}.nc"
+    suffix = properties.get('output_name_suffix')
+    if suffix:
+        filename = f'{filename[:-3]}__{suffix}.nc'
     filename = filename.lower()
     return filename

@@ -7,6 +7,7 @@ import re
 from uuid import uuid4
 from tables.cmip_identifiers import CMIPIdentifiers
 from ppfix.chunking import get_umchunking
+from ppfix.fixorography import fix_orography, OROGRAPHY_FILE
 import time
 
 
@@ -162,6 +163,7 @@ def write_field(
     effective_write_kwargs = dict(DEFAULT_WRITE_KWARGS)
     if write_kwargs is not None:
         effective_write_kwargs.update(write_kwargs)
+    effective_write_kwargs['overwrite'] = False
     cf.write(field, dataset_name=str(output_path), global_attributes=globals, **effective_write_kwargs)
     t2 = time.perf_counter() - t1
 
@@ -188,12 +190,45 @@ def write_field(
 
 
 
+def _prepare_output_properties(fields, cmip, simulation, source_name):
+    properties = [inspect_field(cmip, field) for field in fields]
+    groups = {}
+    for index, extra in enumerate(properties):
+        name = make_output_file_name(simulation, extra)
+        groups.setdefault(name, []).append(index)
+
+    for indices in groups.values():
+        for index in indices:
+            extra = properties[index]
+            suffix = []
+            if extra['start_date'] is None:
+                suffix.append(source_name)
+            if len(indices) > 1:
+                field = fields[index]
+                identity = field.get_property('um_stash_source', None)
+                if identity is None:
+                    identity = field.nc_get_variable(None)
+                if not identity:
+                    raise ValueError(f'Cannot distinguish output fields in {source_name}.')
+                suffix.append(identity)
+            if suffix:
+                extra['output_name_suffix'] = re.sub(
+                    r'[^0-9A-Za-z_.-]+', '_', '__'.join(suffix)
+                ).lower()
+
+    names = [make_output_file_name(simulation, extra) for extra in properties]
+    if len(set(names)) != len(names):
+        raise ValueError(f'Duplicate output filenames remain in {source_name}.')
+    return properties
+
+
 def process_atmos(
     input_folder,
     output_folder,
     metadata,
     component,
     report_timings: bool = False,
+    orography_file: str | Path = OROGRAPHY_FILE,
 ):
     """
     Process all files in folder which are _not_ netcdf files and 
@@ -210,6 +245,9 @@ def process_atmos(
     component:
         The component section to use from metadata.conf, such as model_atmos,
         model_ocean, or model_seaice.
+    orography_file:
+        Read-only source of orography grids for hybrid-height fields. Defaults
+        to assets/orographies_n1280.nc in the repository.
     """
 
     input_folder = Path(input_folder)
@@ -234,6 +272,11 @@ def process_atmos(
         simulation = build_simulation_name(metadata)
 
         cmip = CMIPIdentifiers()
+        output_properties = _prepare_output_properties(fields, cmip, simulation, f.name)
+        for extra in output_properties:
+            target = output_folder / make_output_file_name(simulation, extra)
+            if target.exists() or target.is_symlink():
+                raise FileExistsError(f'Refusing to overwrite {target}.')
 
         t1 = time.perf_counter()
         for i, field in enumerate(fields):
@@ -241,7 +284,7 @@ def process_atmos(
             globals = meta2attr(metadata, field, component)
 
             prep_started = time.perf_counter()
-            extra_properties = inspect_field(cmip, field)
+            extra_properties = output_properties[i]
             extra_properties['tracking_id'] = str(uuid4())
             globals.append('tracking_id')
 
@@ -254,6 +297,7 @@ def process_atmos(
             except Exception as e:
                 pass
 
+            fix_orography(field, orography_file=orography_file)
 
             # Determine chunk shape based on the field's shape
             chunk_shape = get_umchunking(field)

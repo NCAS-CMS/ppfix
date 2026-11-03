@@ -128,10 +128,13 @@ def test_forwards_custom_write_kwargs():
             'cmip6_variable': 'tas',
             'zonal_cell_method': None,
             'start_date': '19500101',
+            'cms_vcoord': 'Z0',
         }
     ), patch.object(fix_atmosphere, 'get_umchunking', return_value=None), patch.object(
         fix_atmosphere, 'meta2attr', return_value=['activity-id', 'runid', 'grid_label']
-    ), patch('pathlib.Path.glob', return_value=[Path('atm.pp')]), patch('pathlib.Path.is_file', return_value=True), patch(
+    ), patch.object(
+        fix_atmosphere, 'fix_orography', wraps=fix_atmosphere.fix_orography
+    ) as fix_orography, patch('pathlib.Path.glob', return_value=[Path('atm.pp')]), patch('pathlib.Path.is_file', return_value=True), patch(
         'pathlib.Path.mkdir'
     ):
         fix_atmosphere.process_atmos(
@@ -148,6 +151,9 @@ def test_forwards_custom_write_kwargs():
     }
     assert write_field.call_args.args[0] is field
     assert write_field.call_args.args[3] == Path('output')
+    fix_orography.assert_called_once_with(
+        field, orography_file=fix_atmosphere.OROGRAPHY_FILE
+    )
 
 
 def test_strips_numeric_suffixes_from_coordinate_vars_and_dimensions():
