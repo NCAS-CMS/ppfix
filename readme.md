@@ -42,3 +42,35 @@ Fields without a start date also gain their input filename as a suffix to avoid
 collisions between array tasks. Ambiguous names raise an error instead of
 silently dropping or replacing a field. Non-colliding dated filenames retain
 their existing format.
+
+Concatenation with provenance ancillaries
+----------------------------------------
+
+Use the public helper to concatenate already-read fields and preserve differing
+scalar properties as field ancillaries:
+
+```python
+import cf
+from ppfix import concatenate_with_ancillaries
+
+# Supply files for one atomic dataset, ordered by time.
+fields = []
+for path in paths:
+    result = cf.read(str(path), aggregate=False)
+    if len(result) != 1:
+        raise ValueError(f'Expected one field in {path}')
+    fields.append(result[0])
+
+combined = concatenate_with_ancillaries(fields, axis='T')
+```
+
+Common properties remain field attributes. Each non-common scalar property
+becomes an ancillary along the concatenation axis, with the source value
+repeated for every time step covered by that source. The helper does not modify
+its input fields or read or write files. It relies on `cf.Field.concatenate`
+for field compatibility; callers must supply correctly ordered inputs.
+
+Empty input, non-common properties missing from an input, and non-scalar
+non-common properties raise `ValueError`. Missing-value and vector-property
+representations are not yet supported. CFA writing and incremental updates are
+not part of this helper.

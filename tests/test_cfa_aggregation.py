@@ -4,6 +4,9 @@ from time import perf_counter
 import cf
 import dask
 import numpy as np
+import pytest
+
+from ppfix import concatenate_with_ancillaries
 
 
 DATA_DIR = Path(__file__).parent / 'data' / 'cfa' / 'monthlyzm_air_temperature_p36'
@@ -105,43 +108,13 @@ def test_real_file_concatenation_with_ancillaries_fully_matches_aggregation():
             fields.append(result[0])
 
         properties = [field.properties() for field in fields]
-        names = set().union(*(p.keys() for p in properties))
-        non_common = sorted(
-            name for name in names
-            if any(name not in p for p in properties)
-            or any(
-                type(p[name]) is not type(properties[0][name])
-                or not np.array_equal(p[name], properties[0][name])
-                for p in properties[1:]
-            )
-        )
-        assert set(PROVENANCE_PROPERTIES) <= set(non_common)
-        for name in non_common:
-            assert all(name in p for p in properties), (
-                f'{name}: missing properties need a masked ancillary representation'
-            )
-            assert all(np.ndim(p[name]) == 0 for p in properties), (
-                f'{name}: this experiment expects scalar source properties'
-            )
-
+        non_common = PROVENANCE_PROPERTIES
         aggregated = cf.aggregate(
             fields, axes='T', field_ancillaries=non_common
         )
         assert len(aggregated) == 1
-        concatenated = cf.Field.concatenate(fields, axis='T')
-        time_axis = concatenated.domain_axis('T', key=True)
+        concatenated = concatenate_with_ancillaries(fields)
         time_sizes = [field.domain_axis('T').size for field in fields]
-
-        for name in non_common:
-            values = np.concatenate([
-                np.repeat(p[name], size)
-                for p, size in zip(properties, time_sizes)
-            ])
-            ancillary = cf.FieldAncillary(
-                properties={'long_name': name}, data=cf.Data(values)
-            )
-            concatenated.del_property(name, None)
-            concatenated.set_construct(ancillary, axes=(time_axis,))
 
         for output in (aggregated[0], concatenated):
             output_time_axis = output.domain_axis('T', key=True)
@@ -166,3 +139,54 @@ def test_real_file_concatenation_with_ancillaries_fully_matches_aggregation():
         assert aggregated[0].equals(
             concatenated, rtol=0, atol=0, verbose=2
         )
+
+
+@pytest.mark.parametrize('with_provenance', [False, True])
+def test_public_concatenation_matches_reference_without_changing_inputs(
+    with_provenance,
+):
+    expected = cf.example_field(2)[:24]
+    expected.set_property('experiment', 'concatenation-test')
+    fields = [expected[:7], expected[7:19], expected[19:]]
+    non_common = ('source_note', 'processing_index') if with_provenance else ()
+    if with_provenance:
+        for index, (field, note) in enumerate(zip(
+            fields, ('first', 'a longer source note', 'last')
+        )):
+            field.set_property('source_note', note)
+            field.set_property('processing_index', np.int32(index))
+    originals = [field.copy() for field in fields]
+
+    with dask.config.set(scheduler='synchronous'):
+        aggregated = cf.aggregate(
+            fields, axes='T', field_ancillaries=non_common
+        )
+        result = concatenate_with_ancillaries(fields, axis='time')
+
+        assert len(aggregated) == 1
+        assert aggregated[0].equals(result, rtol=0, atol=0, verbose=2)
+        if not with_provenance:
+            assert expected.equals(result, rtol=0, atol=0, verbose=2)
+        for field, original in zip(fields, originals):
+            assert original.equals(field, rtol=0, atol=0, verbose=2)
+
+
+def test_public_concatenation_rejects_empty_input():
+    with pytest.raises(ValueError, match='At least one field'):
+        concatenate_with_ancillaries([])
+
+
+@pytest.mark.parametrize('invalid_property', ['missing', 'non-scalar'])
+def test_public_concatenation_rejects_unsupported_properties(invalid_property):
+    example = cf.example_field(2)
+    fields = [example[:1], example[1:2]]
+    if invalid_property == 'missing':
+        fields[0].set_property('source_note', 'first')
+        message = "'source_note'.*missing"
+    else:
+        fields[0].set_property('source_note', ['first', 'second'])
+        fields[1].set_property('source_note', ['third', 'fourth'])
+        message = "'source_note'.*scalar"
+
+    with pytest.raises(ValueError, match=message):
+        concatenate_with_ancillaries(fields)

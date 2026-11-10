@@ -225,9 +225,11 @@ is a correctness regression check, not a controlled performance benchmark.
 `test_real_file_concatenation_with_ancillaries_fully_matches_aggregation` is an
 additional test; the two original tests remain unchanged.
 
-It reads the same 24 local files once, collects their properties, and discovers
-all non-common properties rather than hard-coding the three observed names.
-For the independent reference, it uses
+It reads the same 24 local files once and calls the public
+`ppfix.concatenate_with_ancillaries(fields)` helper, extracted into
+`ppfix/concatenation.py`. The helper discovers all non-common properties rather
+than hard-coding the three observed names. For the independent reference, the
+test explicitly supplies the three expected provenance names to
 `cf.aggregate(fields, axes='T', field_ancillaries=non_common)`, not the default
 aggregation behaviour that joins attribute strings.
 
@@ -235,9 +237,10 @@ The concatenation path creates its ancillary constructs separately, after
 concatenation, from the collected source properties. Each scalar property value
 is repeated for the number of time steps in its source field, and the original
 non-common field attribute is removed. Common attributes remain untouched.
-The test explicitly fails if it encounters missing or non-scalar non-common
-properties: their representation is not resolved by this scalar-property
-experiment.
+The helper raises `ValueError` for empty input or missing or non-scalar
+non-common properties: their representation is not resolved by this
+scalar-property experiment. It does not modify the source fields or perform
+file I/O.
 
 For both outputs, the test checks that each discovered property is an ancillary,
 not a field attribute, that its axis is time, and that its values match each
@@ -247,3 +250,8 @@ the test.
 
 This adds an in-memory check of provenance preservation; CFA writing, round-trip
 validation, and incremental updates remain future work.
+
+Additional example-field tests exercise the public helper with unequal source
+lengths, both common-only metadata and differing string/numeric scalar
+properties, an alternate time-axis selector, and unchanged input fields. Error
+tests cover empty input and missing or non-scalar non-common properties.
