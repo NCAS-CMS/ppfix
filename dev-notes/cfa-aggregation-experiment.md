@@ -255,3 +255,28 @@ Additional example-field tests exercise the public helper with unequal source
 lengths, both common-only metadata and differing string/numeric scalar
 properties, an alternate time-axis selector, and unchanged input fields. Error
 tests cover empty input and missing or non-scalar non-common properties.
+
+### Physical CFA round-trip test
+
+`test_real_file_cfa_round_trip_preserves_full_equivalence` adds physical writing
+and reading to the 24-file comparison. It reads resolved absolute input paths
+with `cfa_write='field'`, builds one field using ancillary-configured aggregation
+and another using `ppfix.concatenate_with_ancillaries`, and writes each to a new
+CFA file with strict field aggregation encoding and absolute fragment URIs.
+Provenance ancillaries are stored in the CFA files rather than aggregated into
+attribute strings.
+
+The test inspects the on-disk aggregation metadata to verify that each field is
+an aggregation variable, not a materialised copy of the payload, and that its
+fragment URIs reference exactly the 24 resolved source files. It then asserts
+full exact equality between each re-read field and its in-memory original, and
+between the two re-read fields, with no ignored properties.
+
+Outputs are named `aggregation.nc` and `concatenation.nc` inside a unique
+`ppfix-cfa-roundtrip-*` temporary directory. The directory is printed and
+recorded as a pytest property. Scientific outputs are retained, even on failure;
+the test does not delete them or use automatic temporary-directory cleanup.
+Run with `-s` to see the retained location on successful runs.
+
+This tests CFA round-trip correctness, not incremental updates or the complete
+simulation-wide CFA-building workflow.

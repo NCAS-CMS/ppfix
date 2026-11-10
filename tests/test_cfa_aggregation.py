@@ -1,8 +1,12 @@
 from pathlib import Path
+import re
+import tempfile
 from time import perf_counter
+from urllib.parse import unquote, urlparse
 
 import cf
 import dask
+from netCDF4 import Dataset
 import numpy as np
 import pytest
 
@@ -190,3 +194,75 @@ def test_public_concatenation_rejects_unsupported_properties(invalid_property):
 
     with pytest.raises(ValueError, match=message):
         concatenate_with_ancillaries(fields)
+
+
+def test_real_file_cfa_round_trip_preserves_full_equivalence(tmp_path):
+    paths = sorted(DATA_DIR.resolve().glob(
+        '*__monthlyzm__*__mean__air_temperature__p36__*.nc'
+    ))
+    assert len(paths) == 24, f'Expected 24 bundled input files in {DATA_DIR}'
+
+    # pytest retains last three by default
+    output_dir = tmp_path/'ppfix-cfa-roundtrip'
+    output_dir.mkdir(parents=True, exist_ok=True)
+    print(f'CFA outputs retained in {str(output_dir)}')
+
+    with dask.config.set(scheduler='synchronous'):
+        fields = []
+        for path in paths:
+            result = cf.read(str(path), aggregate=False, cfa_write='field')
+            assert len(result) == 1, f'Expected one field in {path}'
+            fields.append(result[0])
+
+        aggregated = cf.aggregate(
+            fields, axes='T', field_ancillaries=PROVENANCE_PROPERTIES
+        )
+        assert len(aggregated) == 1
+        concatenated = concatenate_with_ancillaries(fields)
+        assert aggregated[0].equals(concatenated, rtol=0, atol=0, verbose=2)
+
+        reread = []
+        for name, field in (
+            ('aggregation', aggregated[0]), ('concatenation', concatenated)
+        ):
+            output = output_dir / f'{name}.nc'
+            cf.write(
+                field,
+                str(output),
+                cfa={'constructs': 'field', 'uri': 'absolute', 'strict': True},
+                overwrite=False,
+            )
+
+            with Dataset(output, mode='r') as dataset:
+                variable = dataset.variables[field.nc_get_variable()]
+                assert variable.ndim == 0
+                dimensions = variable.getncattr('aggregated_dimensions').split()
+                assert tuple(
+                    len(dataset.dimensions[dimension]) for dimension in dimensions
+                ) == field.shape
+                features = dict(re.findall(
+                    r'(\w+):\s+(\S+)', variable.getncattr('aggregated_data')
+                ))
+                assert {'map', 'uris', 'identifiers'} <= features.keys()
+                uris = dataset.variables[features['uris']][:]
+                fragment_paths = []
+                for uri in np.asarray(uris).ravel():
+                    # CF permits both absolute paths and file: URIs.
+                    parsed = urlparse(str(uri))
+                    assert parsed.scheme in ('', 'file')
+                    assert parsed.netloc in ('', 'localhost')
+                    path = Path(unquote(parsed.path))
+                    assert path.is_absolute()
+                    assert path == path.resolve()
+                    fragment_paths.append(path)
+                assert sorted(fragment_paths) == paths
+
+            result = cf.read(str(output), aggregate=False)
+            assert len(result) == 1
+            restored = result[0]
+            assert restored.data.nc_get_aggregation_write_status()
+            assert field.equals(restored, rtol=0, atol=0, verbose=2)
+            assert set(restored.data.get_filenames()) == {p.as_uri() for p in paths}
+            reread.append(restored)
+
+        assert reread[0].equals(reread[1], rtol=0, atol=0, verbose=2)
