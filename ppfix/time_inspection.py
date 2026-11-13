@@ -138,7 +138,7 @@ def infer_temporal_frequency(field: cf.Field) -> str:
     info = inspect_cmip6_temporal_bounds(field)
 
     if not info.get("has_time_coordinate", False):
-        return "fixed"
+        return "fixed",None
 
     seconds = info.get("interval_first_to_second_seconds")
     if seconds is None:

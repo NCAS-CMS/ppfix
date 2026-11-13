@@ -1,9 +1,14 @@
 import cf
 import time
+from pathlib import Path
 from uuid import uuid4
 
 from ppfix.utils import meta2attr
 from ppfix.chunking import get_nemochunking
+
+
+def _format_gib(num_bytes: int) -> float:
+    return num_bytes / (1024 ** 3)
 
 def rechunk_existing_netcdf(filename, outfilename, metadata, section, kwchoices):
     """
@@ -34,15 +39,29 @@ def rechunk_existing_netcdf(filename, outfilename, metadata, section, kwchoices)
     tracking_id = str(uuid4())
     ta = time.perf_counter()
     for v in fields:
-        meta2attr(metadata, v, section)
+        globals=meta2attr(metadata, v, section)
         chunks = chunk_algorithm(v)
         if chunks is not None:
             v.nc_set_dataset_chunksizes(tuple(chunks))
             v.data.rechunk(tuple(chunks), inplace=True)
-        if not hasattr(v, 'tracking_id'):
+        if hasattr(v,'uuid'):
+            v.set_property('tracking_id', v.get_property('uuid'))
+        elif not hasattr(v, 'tracking_id'):
             v.set_property('tracking_id', tracking_id)
+    globals.append('tracking_id')
         
-    cf.write(fields, str(outfilename), **kwchoices)
+    cf.write(fields, str(outfilename), global_attributes=globals, **kwchoices)
     t2 = time.perf_counter() - ta
-    print(f'Total time for chunking {filename} was {t2:.2f} seconds')
+    output_size = None
+    outpath = Path(outfilename)
+    if outpath.exists():
+        output_size = outpath.stat().st_size
+
+    if output_size is None:
+        print(f'Total time for chunking {filename} was {t2:.2f} seconds')
+    else:
+        print(
+            f'Total time for chunking {filename} was {t2:.2f} seconds; '
+            f'output size {output_size} bytes ({_format_gib(output_size):.2f} GiB)'
+        )
     

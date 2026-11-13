@@ -1,3 +1,6 @@
+import ast
+
+
 def _clean_metadata_value(value):
     value = value.strip()
     if len(value) >= 2 and value[0] == value[-1] and value[0] in ("'", '"'):
@@ -5,9 +8,42 @@ def _clean_metadata_value(value):
     return value
 
 
+def _metadata_mapping(section, option):
+    raw_value = section.get(option)
+    if raw_value is None:
+        return {}
+
+    raw_value = _clean_metadata_value(raw_value)
+    try:
+        parsed = ast.literal_eval(raw_value)
+    except (SyntaxError, ValueError):
+        return {}
+
+    return parsed if isinstance(parsed, dict) else {}
+
+def meta2output(metadata):
+    """ 
+    Generate a dictionary of write options from the metadata.conf file.
+    """
+    write_kwargs = {}
+    if 'output' in metadata.sections():
+        print(f'Using output section from metadata for write options: {metadata["output"]}')
+        expected = ['compress', 'single', 'dataset_chunks']
+        for key, value in metadata['output'].items():
+            if key not in expected:
+                print(f'Warning: unexpected key "{key}" in output section of metadata; ignoring it.')
+        if 'compress' in metadata['output']:
+            write_kwargs['compress'] = metadata.getint('output', 'compress')
+        if 'single' in metadata['output']:
+            write_kwargs['single'] = metadata.getboolean('output', 'single')
+        if 'dataset_chunks' in metadata['output']:
+            write_kwargs['dataset_chunks'] = metadata.get('output', 'dataset_chunks')
+    return write_kwargs
+
 def meta2attr(metadata, field, component):
 
     """Copy metadata sections onto a cf.Field as field properties.
+
 
     Parameters
     ----------
@@ -21,6 +57,8 @@ def meta2attr(metadata, field, component):
         are also accepted.
     """
 
+    globals = []
+
     if component in metadata:
         component_section = component
     else:
@@ -33,20 +71,24 @@ def meta2attr(metadata, field, component):
     for section in sections:
         for key, value in metadata[section].items():
             field.set_property(key, _clean_metadata_value(value))
+            globals.append(key)
 
-    if 'run_specific.variant_id' in metadata:
+    if 'simulations' in metadata and 'ensemble' in metadata['simulations']:
         runid = field.get_property('runid', None)
         if runid is not None:
-            variant_map = metadata['run_specific.variant_id']
+            variant_map = _metadata_mapping(metadata['simulations'], 'ensemble')
             if runid in variant_map:
                 field.set_property('variant_id', variant_map[runid])
+        globals.append('variant_id')
 
+
+    return globals
 
 def build_simulation_name(metadata):
     """ 
     Create simulation name from metadata.conf information
     """
-    project = metadata['General'].get('activity-id', 'unknown')
+    project = metadata['General'].get('activity_id', 'unknown')
     experiment = metadata['General'].get('experiment', 'unknown')
     runid = metadata['run_specific'].get('runid', 'unknown')
     return f'{project}_{experiment}_{runid}'
@@ -55,9 +97,17 @@ def make_output_file_name(simulation, properties):
     """
     Returns the constructed output filename.
     """
+
+    variable = properties['cmip6_variable']
+    if variable in ['unknown','expression']:
+        variable = ''
+
     if properties['zonal_cell_method'] in ['Mean','mean']:
-        filename = f"{simulation}__{properties['cms_table']}zm__{properties['start_date']}__{properties['temporal_cell_method']}__{properties['zonal_cell_method']}__{properties['identity']}__{properties['cmip6_variable']}.nc"
+        filename = f"{simulation}__{properties['cms_table']}zm__{properties['start_date']}__{properties['temporal_cell_method']}__{properties['identity']}__{properties['cms_vcoord']}__{variable}.nc"
     else:
-        filename = f"{simulation}__{properties['cms_table']}__{properties['start_date']}__{properties['temporal_cell_method']}__{properties['identity']}__{properties['cmip6_variable']}.nc"
+        filename = f"{simulation}__{properties['cms_table']}__{properties['start_date']}__{properties['temporal_cell_method']}__{properties['identity']}__{properties['cms_vcoord']}__{variable}.nc"
+    suffix = properties.get('output_name_suffix')
+    if suffix:
+        filename = f'{filename[:-3]}__{suffix}.nc'
     filename = filename.lower()
     return filename

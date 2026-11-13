@@ -13,6 +13,9 @@ dependencies = [
     "pyfive>=1.1.2",
 ]
 
+[project.scripts]
+ppfix-simulation-check = "ppfix.simulation_check:main"
+
 [tool.setuptools.packages.find]
 include = ["ppfix*", "tables*"]
 
