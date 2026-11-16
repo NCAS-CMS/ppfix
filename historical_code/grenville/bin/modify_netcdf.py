@@ -11,16 +11,18 @@ add standard names to cice fields
 update cell_methods for cice fields
 """
 
-import sys
-import os
-import time
-import re
+import configparser
+import csv
 import fnmatch
+import os
+import re
+import sys
+import time
+import uuid
+
 import netCDF4
 from cf import Units
-import configparser
-import uuid
-import csv
+
 from historical_code.grenville.bin.heights import fix_heights
 from historical_code.grenville.bin.ice import fix_ice_indices
 from historical_code.grenville.bin.ocean import fix_ocean_indices

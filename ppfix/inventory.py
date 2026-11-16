@@ -1,10 +1,12 @@
-from pathlib import Path
 import re
-from tables.cmip_identifiers import CMIPIdentifiers
-from ppfix.time_inspection import infer_temporal_frequency
-from ppfix.chunking import get_umchunking
-from ppfix.utils import make_output_file_name
+from pathlib import Path
+
 import cf
+
+from ppfix.chunking import get_umchunking
+from ppfix.time_inspection import infer_temporal_frequency
+from ppfix.utils import make_output_file_name
+from tables.cmip_identifiers import CMIPIdentifiers
 
 DEMARK = '\n------------------------------------------------------------\n'
 
@@ -30,8 +32,23 @@ def inspect_field(cmip, fld, logfile=None):
     else:
         identity =  re.sub(r'[^0-9A-Za-z]+', '_', identity).strip('_')
 
-    if v in [None, 'unknown', 'expression']:
-        v = ''
+   
+    zc = fld.dimension_coordinate('Z', default=None)
+    if zc is not None:
+        zc_name = zc.get_property('standard_name', None)
+        if zc_name is not None:
+            if 'pressure' in zc_name:
+                zc_name = 'P'
+            elif 'height' in zc_name:
+                zc_name = 'H'
+            else:
+                zc_name = 'Z'
+        else:
+            zc_name='Z'
+        size = zc.shape[0] if zc.shape is not None else 0
+        vci = f'{zc_name}{size}'
+    else:
+        vci = 'Z0'
 
     new_properties = {
         'cmip6_table': t,
@@ -40,7 +57,8 @@ def inspect_field(cmip, fld, logfile=None):
         'temporal_cell_method': tcm,
         'zonal_cell_method': xcm,
         'identity': identity,
-        'start_date': start_date, 
+        'start_date': start_date,
+        'cms_vcoord': vci,
     }
 
     if logfile is not None:
@@ -156,4 +174,4 @@ if __name__ == '__main__':
         sys.exit(1)
     print(f'Creating inventory for {target_dir} with cf version {cf.__version__}')
     experiment = 'n1280o12_control'
-    inventory(experiment, target_dir)
+    inventory(experiment, target_dir, inv_file=Path(target_dir) / 'inventory.txt')

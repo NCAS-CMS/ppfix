@@ -1,5 +1,6 @@
-import numpy as np
 import math
+
+import numpy as np
 
 def get_optimal_chunkshape(f, volume, word_size=4,logger=None):
     """ 

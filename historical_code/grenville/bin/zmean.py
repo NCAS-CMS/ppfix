@@ -6,18 +6,19 @@ NOTE - adapted from CANARI for N512-ORCA12 - it does not have any wider applicab
 
 """
 
-import sys
-import os
-import shutil
-import time
-import re
-import fnmatch
-import netCDF4
 import configparser
-import uuid
-import numpy as np
+import fnmatch
+import os
 import random
+import re
+import shutil
+import sys
+import time
+import uuid
+
 import cf
+import netCDF4
+import numpy as np
 
 
 
