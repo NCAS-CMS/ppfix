@@ -262,6 +262,7 @@ def analyse(recs, tol, min_group, expected):
         exp_names, bad = expected
         n_expected, n_expected_bad = len(exp_names), len(bad)
         present = {os.path.basename(r.relpath) for r in recs}
+        explicit_expected = set()
         for name in exp_names:
             if name in present:
                 continue
@@ -269,13 +270,16 @@ def analyse(recs, tol, min_group, expected):
             ts = m.group("ts")
             base = (m.group("exp"), m.group("period"), m.group("method"), m.group("var"))
             ym, phase = (int(ts[:4]), int(ts[4:6])), ts[6:]
+            key = (base, ym, phase)
             if by_base.get(base, {}).get(ym):
-                items[(base, ym, phase)] = DIFF_SUFFIX_NOTE
+                items[key] = DIFF_SUFFIX_NOTE
             else:
                 for k in [k for k in items if k[0] == base and k[1] == ym
-                          and k[2] != phase and items[k] == ""]:
+                          and k[2] != phase and items[k] == ""
+                          and k not in explicit_expected]:
                     del items[k]        # same gap already found; keep the exact expected name
-                items[(base, ym, phase)] = ""
+                items[key] = ""
+            explicit_expected.add(key)
 
     return dict(series=series, flags=flags, gaps=gaps, items=items, exp_range=exp_range,
                 assessed=assessed, unassessed=unassessed, dups=dups,
