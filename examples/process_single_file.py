@@ -38,10 +38,16 @@ def infer_component(input_file: Path) -> str:
 
 @contextmanager
 def staged_input_directory(input_file: Path):
+    input_file = input_file.expanduser().resolve()
+    if not input_file.is_file():
+        raise FileNotFoundError(
+            f'Input file {input_file} does not exist or is not a regular file.'
+        )
+
     with tempfile.TemporaryDirectory(prefix='ppfix-') as tempdir:
         staged_dir = Path(tempdir)
         staged_file = staged_dir / input_file.name
-        staged_file.symlink_to(input_file.resolve())
+        staged_file.symlink_to(input_file)
         yield staged_dir
 
 
