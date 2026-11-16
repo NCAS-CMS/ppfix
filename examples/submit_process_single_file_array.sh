@@ -22,7 +22,8 @@ OUTPUT_DIRECTORY=$(expand_path "$OUTPUT_DIRECTORY")
 METADATA_FILE=$(expand_path "$METADATA_FILE")
 
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-MANIFEST_FILE="$OUTPUT_DIRECTORY/file-manifest.txt"
+RUN_ID=$(date -u +%Y%m%dT%H%M%SZ)
+MANIFEST_FILE="$OUTPUT_DIRECTORY/file-manifest-${RUN_ID}.txt"
 
 mkdir -p "$OUTPUT_DIRECTORY" slurm-out
 

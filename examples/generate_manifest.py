@@ -57,7 +57,8 @@ def main():
         files.append(str(file_path.resolve()))
 
     files = sorted(dict.fromkeys(files))
-    output_manifest.write_text('\n'.join(files) + ('\n' if files else ''))
+    with output_manifest.open('x') as manifest:
+        manifest.write('\n'.join(files) + ('\n' if files else ''))
 
 
 if __name__ == '__main__':
