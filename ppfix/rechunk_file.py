@@ -1,9 +1,11 @@
-import cf
 import time
 from pathlib import Path
 from uuid import uuid4
-from ppfix.utils import meta2attr
+
+import cf
+
 from ppfix.chunking import get_nemochunking
+from ppfix.utils import meta2attr
 
 
 def _format_gib(num_bytes: int) -> float:

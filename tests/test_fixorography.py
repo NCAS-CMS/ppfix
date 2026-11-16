@@ -1,10 +1,10 @@
-from pathlib import Path
 import re
+from pathlib import Path
 from unittest.mock import patch
 
 import cf
-from netCDF4 import Dataset
 import pytest
+from netCDF4 import Dataset
 
 from ppfix import fixorography
 

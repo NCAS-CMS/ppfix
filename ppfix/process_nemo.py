@@ -1,9 +1,8 @@
 import configparser
 from pathlib import Path
 
-
 from ppfix.rechunk_file import rechunk_existing_netcdf
-from ppfix.utils import meta2output, build_simulation_name
+from ppfix.utils import build_simulation_name, meta2output
 
 def new_name(filename: str, origin, simulation: str) -> str:
     parts = filename.split('_')

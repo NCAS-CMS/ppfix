@@ -1,10 +1,12 @@
-from pathlib import Path
 import re
-from tables.cmip_identifiers import CMIPIdentifiers
-from ppfix.time_inspection import infer_temporal_frequency
-from ppfix.chunking import get_umchunking
-from ppfix.utils import make_output_file_name
+from pathlib import Path
+
 import cf
+
+from ppfix.chunking import get_umchunking
+from ppfix.time_inspection import infer_temporal_frequency
+from ppfix.utils import make_output_file_name
+from tables.cmip_identifiers import CMIPIdentifiers
 
 DEMARK = '\n------------------------------------------------------------\n'
 

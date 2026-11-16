@@ -1,9 +1,9 @@
 import argparse
 import configparser
-from ppfix.fix_atmosphere import process_atmos
-from ppfix.process_nemo import process_ocean
-from ppfix.process_nemo import process_sice
 from pathlib import Path
+
+from ppfix.fix_atmosphere import process_atmos
+from ppfix.process_nemo import process_ocean, process_sice
 
 
 def parse_args():

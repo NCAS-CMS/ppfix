@@ -1,4 +1,10 @@
-from ppfix.simulation_check import DIFF_SUFFIX_NOTE, Rec, analyse, missing_names, missing_section
+from ppfix.simulation_check import (
+    DIFF_SUFFIX_NOTE,
+    Rec,
+    analyse,
+    missing_names,
+    missing_section,
+)
 
 
 def test_suffix_swap_in_month_is_not_counted_missing():

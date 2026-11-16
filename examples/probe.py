@@ -1,7 +1,7 @@
 import configparser
+import tempfile
 from contextlib import contextmanager
 from pathlib import Path
-import tempfile
 
 from ppfix.fix_atmosphere import process_atmos
 

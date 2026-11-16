@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-import cf
 import re
+
+import cf
 
 
 def _pair_to_seconds(start: float, end: float, units_obj: object, units_str: str) -> float | None:
