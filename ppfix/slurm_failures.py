@@ -1,5 +1,4 @@
 from __future__ import annotations
-
 import csv
 import re
 from pathlib import Path

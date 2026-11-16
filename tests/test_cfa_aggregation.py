@@ -1,17 +1,15 @@
-from pathlib import Path
 import re
-import tempfile
+from pathlib import Path
 from time import perf_counter
 from urllib.parse import unquote, urlparse
 
 import cf
 import dask
-from netCDF4 import Dataset
 import numpy as np
 import pytest
+from netCDF4 import Dataset
 
 from ppfix import concatenate_with_ancillaries
-
 
 DATA_DIR = Path(__file__).parent / 'data' / 'cfa' / 'monthlyzm_air_temperature_p36'
 PROVENANCE_PROPERTIES = ('original_output', 'tracking_id', 'start_date')
@@ -205,7 +203,7 @@ def test_real_file_cfa_round_trip_preserves_full_equivalence(tmp_path):
     # pytest retains last three by default
     output_dir = tmp_path/'ppfix-cfa-roundtrip'
     output_dir.mkdir(parents=True, exist_ok=True)
-    print(f'CFA outputs retained in {str(output_dir)}')
+    print(f'CFA outputs retained in {output_dir!s}')
 
     with dask.config.set(scheduler='synchronous'):
         fields = []

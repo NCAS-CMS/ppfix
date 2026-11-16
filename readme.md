@@ -29,7 +29,7 @@ For large cycle directories on JASMIN, copy `examples/process_single_file.py` an
 `examples/slurm_process_single_file_array.sh` into your working area and run one input file per Slurm array task.
 Use `examples/generate_manifest.py` to build a text manifest of absolute input paths, then let each array task pick its own line from that manifest. If you pass a prefix such as `blah/1950`, the manifest generator will expand it to matching directories like `blah/195001/` and `blah/195002/` before collecting files.
 For convenience, `examples/submit_process_single_file_array.sh` will build the manifest and submit the Slurm array in one step.
-If some array tasks fail, run `examples/find_failed_array_tasks.py SLURM_OUTPUT_DIRECTORY MANIFEST_FILE --job-id ARRAY_JOB_ID` with the job ID and manifest from the same submission. It scans that array's Slurm `.err` files, writes a CSV summary, and creates a manifest containing just the failed input files.
+If some array tasks fail, see [analysing Slurm array failures](doc/slurm-failures.md) for identifying and reviewing failed tasks.
 
 Atmospheric output safety
 -------------------------

@@ -1,12 +1,10 @@
 import argparse
 import configparser
+import tempfile
 from contextlib import contextmanager
 from pathlib import Path
-import tempfile
-
 from ppfix.fix_atmosphere import process_atmos
-from ppfix.process_nemo import process_ocean
-from ppfix.process_nemo import process_sice
+from ppfix.process_nemo import process_ocean, process_sice
 
 
 def parse_args():

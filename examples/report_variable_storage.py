@@ -2,7 +2,6 @@ import argparse
 import csv
 from pathlib import Path
 import sys
-
 import h5py
 
 

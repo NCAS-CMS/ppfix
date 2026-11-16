@@ -1,15 +1,21 @@
-import cf
-from ppfix.utils import meta2attr, build_simulation_name, make_output_file_name, meta2output
-from ppfix.inventory import inspect_field
+import re
+import time
 from pathlib import Path
 from typing import Any
-import re
 from uuid import uuid4
-from tables.cmip_identifiers import CMIPIdentifiers
-from ppfix.chunking import get_umchunking
-from ppfix.fixorography import fix_orography, OROGRAPHY_FILE
-import time
 
+import cf
+
+from ppfix.chunking import get_umchunking
+from ppfix.fixorography import OROGRAPHY_FILE, fix_orography
+from ppfix.inventory import inspect_field
+from ppfix.utils import (
+    build_simulation_name,
+    make_output_file_name,
+    meta2attr,
+    meta2output,
+)
+from tables.cmip_identifiers import CMIPIdentifiers
 
 DEFAULT_WRITE_KWARGS = {
     'fmt': 'NETCDF4',
@@ -294,7 +300,7 @@ def process_atmos(
             # deal with squeezing the 'Z' dimension if it exists
             try:
                 field.squeeze('Z', inplace=True)
-            except Exception as e:
+            except Exception:
                 pass
 
             fix_orography(field, orography_file=orography_file)
