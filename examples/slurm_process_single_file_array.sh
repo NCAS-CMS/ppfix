@@ -25,8 +25,8 @@ set -euo pipefail
 source "$(conda info --base)/etc/profile.d/conda.sh"
 mamba activate ppfix
 
-if [[ $# -lt 3 ]]; then
-    echo "Usage: $0 MANIFEST_FILE OUTPUT_DIRECTORY METADATA_FILE" >&2
+if [[ $# -lt 4 ]]; then
+    echo "Usage: $0 SCRIPT_DIR MANIFEST_FILE OUTPUT_DIRECTORY METADATA_FILE" >&2
     exit 1
 fi
 
