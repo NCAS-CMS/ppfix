@@ -1,5 +1,7 @@
 import argparse
+import csv
 from pathlib import Path
+import sys
 
 import h5py
 
@@ -64,17 +66,18 @@ def report_variable_storage(input_file: Path) -> None:
     rows.sort(key=lambda row: row['storage_bytes'], reverse=True)
 
     print(f'File: {input_file}')
-    print(
-        'name,shape,dtype,logical_bytes,storage_bytes,logical_gib,storage_gib,storage_to_logical_ratio'
-    )
+    writer = csv.writer(sys.stdout, lineterminator='\n')
+    writer.writerow([
+        'name', 'shape', 'dtype', 'logical_bytes', 'storage_bytes',
+        'logical_gib', 'storage_gib', 'storage_to_logical_ratio',
+    ])
     for row in rows:
         ratio_text = '' if row['ratio'] is None else f"{row['ratio']:.4f}"
-        print(
-            f"{row['name']},{row['shape']},{row['dtype']},"
-            f"{row['logical_bytes']},{row['storage_bytes']},"
-            f"{format_gib(row['logical_bytes']):.4f},{format_gib(row['storage_bytes']):.4f},"
-            f"{ratio_text}"
-        )
+        writer.writerow([
+            row['name'], row['shape'], row['dtype'], row['logical_bytes'],
+            row['storage_bytes'], f"{format_gib(row['logical_bytes']):.4f}",
+            f"{format_gib(row['storage_bytes']):.4f}", ratio_text,
+        ])
 
 
 def main():
