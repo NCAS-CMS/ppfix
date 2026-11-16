@@ -219,4 +219,5 @@ def test_process_sice_rewrites_output_filename_from_simulation_and_suffix():
     ), patch('pathlib.Path.exists', return_value=False):
         process_nemo.process_sice('input', 'output', metadata())
 
-    assert rechunk.call_args.args[1] == Path('output/fred_1m_19501101-19501201_grid-X.nc')
+    assert rechunk.call_args.args[1] == Path('output/fred_sice_1m_19501101-19501201_grid-X.nc')
+    
