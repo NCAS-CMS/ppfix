@@ -10,6 +10,7 @@ def parse_args():
     )
     parser.add_argument('slurm_output_directory', type=Path)
     parser.add_argument('manifest_file', type=Path)
+    parser.add_argument('--job-id', type=int, required=True, help='Slurm array job ID for this manifest.')
     parser.add_argument('--report-file', type=Path)
     parser.add_argument('--failed-manifest-file', type=Path)
     return parser.parse_args()
@@ -33,7 +34,7 @@ def main():
     else:
         failed_manifest_file = failed_manifest_file.expanduser().resolve()
 
-    failures = collect_failed_tasks(slurm_output_directory, manifest_file)
+    failures = collect_failed_tasks(slurm_output_directory, manifest_file, args.job_id)
     write_failure_reports(failures, report_file, failed_manifest_file)
 
     print(f'Found {len(failures)} failed tasks.')

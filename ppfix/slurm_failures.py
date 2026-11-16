@@ -20,13 +20,17 @@ def first_nonempty_line(path: Path) -> str:
     return ''
 
 
-def collect_failed_tasks(slurm_output_dir: Path, manifest_file: Path) -> list[dict[str, str]]:
+def collect_failed_tasks(
+    slurm_output_dir: Path, manifest_file: Path, job_id: int,
+) -> list[dict[str, str]]:
+    if job_id < 0:
+        raise ValueError('Slurm array job ID must be non-negative')
     manifest_entries = load_manifest(manifest_file)
     failures = []
 
     for err_file in sorted(slurm_output_dir.glob('*.err')):
         match = FAILED_TASK_RE.match(err_file.name)
-        if match is None or err_file.stat().st_size == 0:
+        if match is None or int(match.group('job_id')) != job_id or err_file.stat().st_size == 0:
             continue
 
         task_id = int(match.group('task_id'))

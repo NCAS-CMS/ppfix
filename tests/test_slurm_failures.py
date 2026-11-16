@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 from ppfix.slurm_failures import collect_failed_tasks, write_failure_reports
 
 
@@ -13,10 +15,12 @@ def test_collects_nonempty_error_files_and_maps_manifest_entries(tmp_path):
     (slurm_dir / 'ppfix_4000_0.err').write_text('')
     (slurm_dir / 'ppfix_4000_1.err').write_text('Traceback: bad file\nmore detail\n')
     (slurm_dir / 'ppfix_4000_2.err').write_text('OOM killed\n')
+    (slurm_dir / 'ppfix_3999_0.err').write_text('Failure from an older array\n')
 
-    failures = collect_failed_tasks(slurm_dir, manifest_file)
+    failures = collect_failed_tasks(slurm_dir, manifest_file, 4000)
 
     assert [failure['task_id'] for failure in failures] == ['1', '2']
+    assert {failure['job_id'] for failure in failures} == {'4000'}
     assert failures[0]['input_file'] == '/data/input1'
     assert failures[1]['input_file'] == '/data/input2'
     assert failures[0]['error_summary'] == 'Traceback: bad file'
@@ -27,3 +31,6 @@ def test_collects_nonempty_error_files_and_maps_manifest_entries(tmp_path):
 
     assert 'job_id,task_id,input_file,error_file,output_file,error_summary' in report_file.read_text()
     assert failed_manifest.read_text() == '/data/input1\n/data/input2\n'
+
+    with pytest.raises(ValueError, match='non-negative'):
+        collect_failed_tasks(slurm_dir, manifest_file, -1)
